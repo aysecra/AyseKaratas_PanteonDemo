@@ -1,2 +1,2 @@
-# AyseKaratas_PanteonDemo
+# Ayse Karatas Panteon Demo
 Strategy Game Demo for Game Developer Application to Panteon
