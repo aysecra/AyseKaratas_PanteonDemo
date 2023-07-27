@@ -1,18 +1,49 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GridsCell : MonoBehaviour
+namespace PanteonDemo
 {
-    // Start is called before the first frame update
-    void Start()
+    public class GridsCell : MonoBehaviour,
+        EventListener<GridCellsIndexCalcEvent>
     {
-        
-    }
+        [Header("Cell Info")] [SerializeField] private uint _row;
+        [SerializeField] private uint _column;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public uint Column
+        {
+            get => _column;
+            set => _column = value;
+        }
+
+        public uint Row
+        {
+            get => _row;
+            set => _row = value;
+        }
+
+
+        private void Start()
+        {
+        }
+
+        private void OnValidate()
+        {
+        }
+
+        private void OnEnable()
+        {
+            this.EventStartListening<GridCellsIndexCalcEvent>();
+        }
+
+        private void OnDisable()
+        {
+            this.EventStopListening<GridCellsIndexCalcEvent>();
+        }
+
+        public void OnEventTrigger(GridCellsIndexCalcEvent currentEvent)
+        {
+            
+        }
     }
 }
