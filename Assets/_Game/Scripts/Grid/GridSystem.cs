@@ -1,18 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
-public class GridSystem : MonoBehaviour
+namespace PanteonDemo
 {
-    // Start is called before the first frame update
-    void Start()
+    public class GridSystem : MonoBehaviour
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
