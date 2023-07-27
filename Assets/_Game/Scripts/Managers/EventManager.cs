@@ -7,9 +7,7 @@ namespace PanteonDemo
     public static class EventManager
     {
         private static Dictionary<Type, List<IEventListener>> _listenerDictionary;
-
-        public delegate void Delegate<T>(T eventType);
-
+        
         public static void EventStartListening<T>(this EventListener<T> listener) where T : struct
         {
             AddEventListener<T>(listener);
