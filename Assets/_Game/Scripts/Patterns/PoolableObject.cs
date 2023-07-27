@@ -2,17 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PoolableObject : MonoBehaviour
+namespace PanteonDemo
 {
-    // Start is called before the first frame update
-    void Start()
+    public class PoolableObject : MonoBehaviour
     {
-        
-    }
+        public void ExecuteObject()
+        {
+            gameObject.SetActive(true);
+        }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public void DestroyObject()
+        {
+            gameObject.SetActive(false);
+        }
     }
 }
