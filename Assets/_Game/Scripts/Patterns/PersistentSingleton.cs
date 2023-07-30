@@ -23,7 +23,7 @@ namespace PanteonDemo
                 return _instance;
             }
         }
-        void Awake()
+        protected virtual void Awake()
         {
             if (_instance == null)
             {

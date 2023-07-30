@@ -2,17 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LevelManager : MonoBehaviour
+namespace PanteonDemo
 {
-    // Start is called before the first frame update
-    void Start()
+    public enum LevelState
     {
-        
+        Opened,
+        Started,
+        Paused,
+        Failed,
+        Completed
     }
-
-    // Update is called once per frame
-    void Update()
+    
+    public class LevelManager : PersistentSingleton<LevelManager>
     {
-        
+        public void SetLevelPaused()
+        {
+            
+        }
+
+        public void SetLevelCompleted()
+        {
+            
+        }
+        public void SetLevelFailed()
+        {
+            
+        }
     }
 }

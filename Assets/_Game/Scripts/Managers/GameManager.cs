@@ -3,7 +3,8 @@ using UnityEngine;
 
 namespace PanteonDemo
 {
-    public class GameManager : MonoBehaviour
+    public class GameManager : PersistentSingleton<GameManager>
     {
+       
     }
 }
