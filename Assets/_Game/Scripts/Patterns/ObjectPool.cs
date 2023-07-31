@@ -9,10 +9,17 @@ namespace PanteonDemo
     {
         [SerializeField] private PoolableObject _poolableObject;
         [SerializeField] private uint _amountToPool;
+        
         private List<GameObject> _pooledObjects;
 
+        protected uint amountToPool
+        {
+            get => _amountToPool;
+            set => _amountToPool = value;
+        }
 
-        void Start()
+
+        protected virtual void Start()
         {
             _pooledObjects = new List<GameObject>();
             GameObject newObject;

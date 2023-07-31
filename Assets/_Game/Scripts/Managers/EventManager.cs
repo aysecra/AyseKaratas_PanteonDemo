@@ -22,18 +22,6 @@ namespace PanteonDemo
         {
             TriggerListenerEvent(triggerEvent);
         }
-        
-        public static void EventStartListening<T>() where T : class
-        {
-        }
-
-        public static void EventStopListening<T>() where T : struct
-        {
-        }
-
-        public static void TriggerEvent<T>() where T : struct
-        {
-        }
 
         #region Listener Dictionary Elements
 

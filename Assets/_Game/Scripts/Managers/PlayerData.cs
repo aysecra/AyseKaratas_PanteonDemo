@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 [Serializable]
 public class PlayerData
@@ -11,6 +12,8 @@ public class PlayerData
 [Serializable]
 public class Soldier
 {
+    public string Title;
+    public Sprite Image;
     public uint Health;
     public uint Damage;
 }

@@ -2,17 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SharedLevelManager : MonoBehaviour
+namespace PanteonDemo
 {
-    // Start is called before the first frame update
-    void Start()
+    public class SharedLevelManager : PersistentSingleton<SharedLevelManager>
     {
-        
-    }
+        [SerializeField] private List<Soldier> _spawnedSoldierElements = new List<Soldier>();
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public List<Soldier> SpawnedSoldierElements => _spawnedSoldierElements;
     }
 }

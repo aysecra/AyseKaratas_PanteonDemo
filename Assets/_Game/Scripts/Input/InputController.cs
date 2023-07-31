@@ -9,24 +9,24 @@ namespace PanteonDemo
         MobileFinger,
         MobileJoystick
     }
-    
+
     public enum TouchState
     {
         Begin,
         End
     }
-    
+
     /// <summary>
     /// Event is triggered when tapping
     /// </summary>
-    public struct TapEvent
+    public struct InputEvent
     {
-        public TouchState NewState { get; }
+        public TouchState State { get; }
         public Vector3 Position { get; }
-        
-        public TapEvent(TouchState newState, Vector3 position)
+
+        public InputEvent(TouchState state, Vector3 position)
         {
-            NewState = newState;
+            State = state;
             Position = position;
         }
     }
@@ -34,10 +34,21 @@ namespace PanteonDemo
     public class InputController : Singleton<InputController>
     {
         [SerializeField] private InputType _inputType;
-        
-        private Vector3 _firstTapPosition;
-        private Vector3 _endTapPosition;
+
+        private Vector3 _firstPosition;
+        private Vector3 _endPosition;
+        private Vector3 _currentPosition;
+        private Vector3 _swipeVector;
         private Vector3 _swipeDirection;
+        private float _swipeLength;
+
+        public Vector3 CurrentPosition => _currentPosition;
+
+        public Vector3 SwipeVector => _swipeVector;
+
+        public Vector3 SwipeDirection => _swipeDirection;
+
+        public float SwipeLength => _swipeLength;
 
         private void Update()
         {
@@ -61,36 +72,52 @@ namespace PanteonDemo
             if (Input.touchCount == 1)
             {
                 Touch touch = Input.GetTouch(0);
+                Vector3 pos = touch.position;
 
                 if (touch.phase == TouchPhase.Began)
                 {
-                    _firstTapPosition = touch.position;
+                    _firstPosition = pos;
+                    EventManager.TriggerEvent(new InputEvent(TouchState.Begin, _firstPosition));
                 }
-                
+
                 else if (touch.phase == TouchPhase.Ended)
                 {
-                    _endTapPosition = touch.position;
+                    _endPosition = pos;
+                    EventManager.TriggerEvent(new InputEvent(TouchState.End, _endPosition));
                 }
+
+                _currentPosition = pos;
+                _swipeVector = _currentPosition - _firstPosition;
+                _swipeLength = Vector3.Distance(_currentPosition, _firstPosition);
+                _swipeDirection = _swipeVector.normalized;
             }
         }
-        
-        
+
+
         private void DetectMouseInput(uint mouseButtonData)
         {
             if (mouseButtonData <= 3)
             {
                 int mouseButton = (int) mouseButtonData;
 
-                if (Input.GetMouseButtonDown(mouseButton))
+                if (Input.GetMouseButton(mouseButton))
                 {
-                    _firstTapPosition = Input.mousePosition;
-                    print("mouse down position: " + _firstTapPosition);
-                }
-                
-                else if (Input.GetMouseButtonUp(mouseButton))
-                {
-                    _endTapPosition = Input.mousePosition;
-                    print("mouse up position: " + _endTapPosition);
+                    if (Input.GetMouseButtonDown(mouseButton))
+                    {
+                        _firstPosition = Input.mousePosition;
+                        EventManager.TriggerEvent(new InputEvent(TouchState.Begin, _firstPosition));
+                    }
+
+                    else if (Input.GetMouseButtonUp(mouseButton))
+                    {
+                        _endPosition = Input.mousePosition;
+                        EventManager.TriggerEvent(new InputEvent(TouchState.End, _endPosition));
+                    }
+
+                    _currentPosition = Input.mousePosition;
+                    _swipeVector = _currentPosition - _firstPosition;
+                    _swipeLength = Vector3.Distance(_currentPosition, _firstPosition);
+                    _swipeDirection = _swipeVector.normalized;
                 }
             }
         }
