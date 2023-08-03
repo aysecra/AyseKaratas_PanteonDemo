@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,14 +6,15 @@ namespace PanteonDemo
     [System.Serializable]
     public class LevelProgress
     {
-        [StringInList(typeof(PropertyDrawersHelper), "AllSceneNames")] public string LevelName;
+        [StringInList(typeof(PropertyDrawersHelper), "AllSceneNames")]
+        public string LevelName;
     }
 
     public class ProgressManager : PersistentSingleton<ProgressManager>
-                                    ,EventListener<LevelEvent>
+        , EventListener<LevelEvent>
     {
         [SerializeField] private List<LevelProgress> _levels;
-        
+
         private PlayerData _playerData;
         private const string _playerDataPrefKey = "PlayerData";
 
@@ -22,7 +22,12 @@ namespace PanteonDemo
         {
             base.Awake();
 
-            if (!PlayerPrefs.HasKey(_playerDataPrefKey))
+            if (PlayerPrefs.HasKey(_playerDataPrefKey))
+            {
+                _playerData = JsonUtility.FromJson<PlayerData>(PlayerPrefs.GetString(_playerDataPrefKey));
+            }
+
+            else if (!PlayerPrefs.HasKey(_playerDataPrefKey) && _levels.Count > 0)
             {
                 _playerData = new PlayerData
                 {
@@ -30,23 +35,18 @@ namespace PanteonDemo
                     LevelIndex = 0
                 };
             }
-
-            else
-            {
-                _playerData = JsonUtility.FromJson<PlayerData>(PlayerPrefs.GetString(_playerDataPrefKey));
-            }
         }
-        
+
         private void SetPlayerData()
         {
             PlayerPrefs.SetString(_playerDataPrefKey, JsonUtility.ToJson(_playerData));
         }
-        
+
         private void GetPlayerData()
         {
             PlayerPrefs.SetString(_playerDataPrefKey, JsonUtility.ToJson(_playerData));
         }
-        
+
         private void SetNextLevel()
         {
             int index = _playerData.LevelIndex + 1 < _levels.Count ? _playerData.LevelIndex + 1 : 0;
@@ -58,7 +58,7 @@ namespace PanteonDemo
         {
             return _playerData.LevelName;
         }
-        
+
         public string GetNextLevelName()
         {
             int index = _playerData.LevelIndex + 1 < _levels.Count ? _playerData.LevelIndex + 1 : 0;

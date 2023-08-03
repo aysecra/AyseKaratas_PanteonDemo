@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace PanteonDemo
 {
@@ -74,11 +73,6 @@ namespace PanteonDemo
             }
         }
         #endregion
-    }
-
-    public class StructListenerManager
-    {
-        
     }
 
     public interface IEventListener

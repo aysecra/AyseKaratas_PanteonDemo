@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace PanteonDemo
 {
-    public class LevelManager : PersistentSingleton<LevelManager>
+    public static class MovementManager
     {
-        
+   
     }
 }

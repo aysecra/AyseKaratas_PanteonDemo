@@ -4,10 +4,30 @@ using UnityEngine;
 
 namespace PanteonDemo
 {
-    public class GridsCell : MonoBehaviour,
-        EventListener<GridCellsIndexCalcEvent>
+    public class GridsCellBase
     {
-        [Header("Cell Info")] [SerializeField] private uint _row;
+        public GridsCell CellObjectScript;
+        public GridsCellBase Connection;
+        // distance from the cell to the start cell 
+        public float G;
+        // distance from the cell to the target cell 
+        public float H;
+        public float F => G + H;
+        public bool Walkable;
+
+        public List<GridsCellBase> Neighbors;
+
+        public float GetDistance(GridsCellBase neighbor)
+        {
+            return 0;
+        }
+    }
+
+    public class GridsCell : MonoBehaviour
+                            , EventListener<GridCellsIndexCalcEvent>
+    {
+        [Header("Cell Info")] 
+        [SerializeField] private uint _row;
         [SerializeField] private uint _column;
 
         public uint Column
