@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1366730631895706158, guid: 6ba84fde4d2ab42f3ab9ce5f5dd78ac0, type: 3}
       propertyPath: m_Value
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1799685344843947330, guid: 6ba84fde4d2ab42f3ab9ce5f5dd78ac0, type: 3}
       propertyPath: m_AnchorMax.x
@@ -141,7 +141,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2088322518090048339, guid: 6ba84fde4d2ab42f3ab9ce5f5dd78ac0, type: 3}
       propertyPath: m_Name
-      value: ProductionMenu Variant
+      value: ProductionMenu
       objectReference: {fileID: 0}
     - target: {fileID: 2088322518451045852, guid: 6ba84fde4d2ab42f3ab9ce5f5dd78ac0, type: 3}
       propertyPath: m_Color.a
@@ -177,12 +177,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6ba84fde4d2ab42f3ab9ce5f5dd78ac0, type: 3}
+--- !u!114 &8535529708372547070 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1366730631895706158, guid: 6ba84fde4d2ab42f3ab9ce5f5dd78ac0, type: 3}
+  m_PrefabInstance: {fileID: 7242862764394233808}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a4db7a114972834c8e4117be1d82ba3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8680942317792386179 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2088322518090048339, guid: 6ba84fde4d2ab42f3ab9ce5f5dd78ac0, type: 3}
   m_PrefabInstance: {fileID: 7242862764394233808}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &-5817780577705247439
+--- !u!114 &1583048158330128091
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -191,13 +202,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 8680942317792386179}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0eec25aefeecf4d26ae870f6ad939b44, type: 3}
+  m_Script: {fileID: 11500000, guid: c71be0de69c6a41d9b66f6db653e2aab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _parentObject: {fileID: 0}
-  _poolableObject: {fileID: 0}
+  _parentObject: {fileID: 8680942317883338271}
+  _poolableObject: {fileID: 2060296715191847573, guid: 234c9c33b8caa40f0950ad0268b8ea81, type: 3}
   _amountToPool: 0
   _isAllObjectActive: 0
-  _elementContainer: {fileID: 0}
-  _scrollerElement: {fileID: 0}
-  _scrollbar: {fileID: 0}
+  _scrollbar: {fileID: 8535529708372547070}
+--- !u!224 &8680942317883338271 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 2088322518733066703, guid: 6ba84fde4d2ab42f3ab9ce5f5dd78ac0, type: 3}
+  m_PrefabInstance: {fileID: 7242862764394233808}
+  m_PrefabAsset: {fileID: 0}

@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 namespace PanteonDemo
 {
-    public class ScrollerElement : PoolableObject
+    public class SoldierButton : PoolableObject
     {
         [Header("Core Elements")] 
         [SerializeField] private Image _imgElement;
@@ -14,7 +14,7 @@ namespace PanteonDemo
         public void SetElementValue(Soldier soldierData)
         {
             _imgElement.sprite = soldierData.Image;
-            _textTitle.text = soldierData.Title;
+            _textTitle.text = soldierData.Name;
             _textHealth.text = soldierData.Health.ToString();
             _textDamage.text = soldierData.Damage.ToString();
         }

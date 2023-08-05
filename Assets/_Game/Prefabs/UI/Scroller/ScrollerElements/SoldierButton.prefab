@@ -237,12 +237,12 @@ GameObject:
   - component: {fileID: 2353073991239163707}
   - component: {fileID: 4532340441618458814}
   m_Layer: 5
-  m_Name: Cost
+  m_Name: Damage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3357965557696229304
 RectTransform:
   m_ObjectHideFlags: 0
@@ -258,7 +258,7 @@ RectTransform:
   - {fileID: 853164384241336843}
   - {fileID: 8241838801611033303}
   m_Father: {fileID: 3823922545607813993}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
@@ -315,12 +315,12 @@ GameObject:
   - component: {fileID: 4862784291643381597}
   - component: {fileID: 4576412408157235094}
   m_Layer: 5
-  m_Name: LevelText
+  m_Name: Health
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6956298732002564264
 RectTransform:
   m_ObjectHideFlags: 0
@@ -328,18 +328,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2538649182736836120}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 12919148520499233}
-  m_Father: {fileID: 3823922545607813993}
+  m_Father: {fileID: 1484843087370212092}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -14}
+  m_AnchoredPosition: {x: 0, y: 87.4}
   m_SizeDelta: {x: 0, y: 49}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &4862784291643381597
@@ -743,7 +743,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Lvl. 999
+  m_text: Health
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -932,7 +932,7 @@ RectTransform:
   m_Children:
   - {fileID: 4517257953663324502}
   m_Father: {fileID: 3823922545607813993}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
@@ -1009,7 +1009,7 @@ RectTransform:
   m_Children:
   - {fileID: 7427025427694576830}
   m_Father: {fileID: 3823922545607813993}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
@@ -1086,7 +1086,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3319341166454558724}
-  - {fileID: 6956298732002564264}
   - {fileID: 1484843087370212092}
   - {fileID: 3357965557696229304}
   - {fileID: 598276586891534798}
@@ -1206,7 +1205,7 @@ GameObject:
   - component: {fileID: 5398343933259943820}
   - component: {fileID: 5646441042934656057}
   m_Layer: 5
-  m_Name: ScrollerButtonElement
+  m_Name: SoldierButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1260,10 +1259,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _lifeTime: 0
-  _imgElement: {fileID: 0}
-  _textTitle: {fileID: 0}
-  _textHealth: {fileID: 0}
-  _textDamage: {fileID: 0}
+  _imgElement: {fileID: 548847145366148094}
+  _textTitle: {fileID: 6443043483559716848}
+  _textHealth: {fileID: 2534828861539024207}
+  _textDamage: {fileID: 2049939922015403135}
 --- !u!1 &6806331827368359716
 GameObject:
   m_ObjectHideFlags: 0
@@ -1300,8 +1299,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 45, y: -16}
-  m_SizeDelta: {x: 131.1799, y: 65.0891}
+  m_AnchoredPosition: {x: 62.03, y: -16}
+  m_SizeDelta: {x: 165.24, y: 65.089}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5049191368531285910
 CanvasRenderer:
@@ -1331,7 +1330,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 15300
+  m_text: Damage
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1443,12 +1442,13 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4951265510844614950}
+  - {fileID: 6956298732002564264}
   m_Father: {fileID: 3823922545607813993}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -101.4}
+  m_AnchoredPosition: {x: 0, y: 4}
   m_SizeDelta: {x: 0, y: 34.8}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &1754447678932294891
@@ -1748,7 +1748,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3823922545607813993}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}

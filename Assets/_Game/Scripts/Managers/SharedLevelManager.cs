@@ -5,8 +5,15 @@ namespace PanteonDemo
 {
     public class SharedLevelManager : PersistentSingleton<SharedLevelManager>
     {
-        [SerializeField] private List<Soldier> _spawnedSoldierElements = new List<Soldier>();
+        [Header("Object Pools")]
+        [SerializeField] private ObjectPool _soldierPool;
+        [SerializeField] private ObjectPool _buildingPool;
+        
+        [Header("Unit Lists")]
+        [SerializeField] private List<Soldier> _soldierUnits = new List<Soldier>();
+        [SerializeField] private List<Building> _buildingElements = new List<Building>();
 
-        public List<Soldier> SpawnedSoldierElements => _spawnedSoldierElements;
+        public List<Soldier> SoldierUnits => _soldierUnits;
+        public List<Building> BuildingElements => _buildingElements;
     }
 }

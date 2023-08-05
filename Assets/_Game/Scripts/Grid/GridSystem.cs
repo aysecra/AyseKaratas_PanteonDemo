@@ -15,7 +15,7 @@ namespace PanteonDemo
         }
     }
 
-    public class GridSystem : MonoBehaviour
+    public class GridSystem : Singleton<GridSystem>
     {
         [Header("Core Elements")] [SerializeField]
         private Grid _grid;
@@ -85,6 +85,7 @@ namespace PanteonDemo
                 if (child.TryGetComponent(out GridsCell cell))
                 {
                     _cellList.Add(cell);
+                    cell.SetCellBase();
                 }
             }
 
