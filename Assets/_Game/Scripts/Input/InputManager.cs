@@ -12,7 +12,10 @@ namespace PanteonDemo
 
     public enum TouchState
     {
-        Begin,
+        LeftClick,
+        RightClick,
+        MiddleClick,
+        Touch,
         End
     }
 
@@ -31,7 +34,7 @@ namespace PanteonDemo
         }
     }
 
-    public class InputController : Singleton<InputController>
+    public class InputManager : Singleton<InputManager>
     {
         [SerializeField] private InputType _inputType;
 
@@ -77,7 +80,7 @@ namespace PanteonDemo
                 if (touch.phase == TouchPhase.Began)
                 {
                     _firstPosition = pos;
-                    EventManager.TriggerEvent(new InputEvent(TouchState.Begin, _firstPosition));
+                    EventManager.TriggerEvent(new InputEvent(TouchState.Touch, _firstPosition));
                 }
 
                 else if (touch.phase == TouchPhase.Ended)
@@ -98,6 +101,9 @@ namespace PanteonDemo
         {
             if (mouseButtonData <= 3)
             {
+                TouchState state = mouseButtonData == 0 ? TouchState.LeftClick :
+                    mouseButtonData == 1 ? TouchState.RightClick : TouchState.MiddleClick;
+                
                 int mouseButton = (int) mouseButtonData;
 
                 if (Input.GetMouseButton(mouseButton))
@@ -105,7 +111,7 @@ namespace PanteonDemo
                     if (Input.GetMouseButtonDown(mouseButton))
                     {
                         _firstPosition = Input.mousePosition;
-                        EventManager.TriggerEvent(new InputEvent(TouchState.Begin, _firstPosition));
+                        EventManager.TriggerEvent(new InputEvent(state, _firstPosition));
                     }
 
                     else if (Input.GetMouseButtonUp(mouseButton))

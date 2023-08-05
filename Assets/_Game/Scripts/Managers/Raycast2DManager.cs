@@ -4,25 +4,19 @@ using UnityEngine;
 
 namespace PanteonDemo
 {
-    public struct HittedObject<T> where T : class
+    public static class Raycast2DManager
     {
-        public T HittedScript;
-        public Transform HittedTransform;
-    }
-
-    public static class RaycastManager
-    {
-        public static bool SendRaycast(Vector3 startPoint, Vector3 direction, LayerMask targetLayer,
+        public static bool SendRaycast(Vector2 startPoint, Vector2 direction, LayerMask targetLayer,
             out Transform hittedTransform, bool isDraw = false, Color drawColor = default)
         {
             drawColor = drawColor == default ? Color.red : drawColor;
             hittedTransform = null;
-            RaycastHit hit;
+            RaycastHit2D hit = Physics2D.Raycast(startPoint, direction, Mathf.Infinity, targetLayer);
 
-            if (Physics.Raycast(startPoint, direction, out hit, Mathf.Infinity, targetLayer))
+            if (hit.collider != null)
             {
-                if (isDraw)
-                    Debug.DrawRay(startPoint, direction * hit.distance, drawColor);
+                // if (isDraw)
+                // Debug.DrawRay(startPoint, direction * hit.distance, drawColor);
                 hittedTransform = hit.transform;
                 return true;
             }
@@ -30,12 +24,12 @@ namespace PanteonDemo
             return false;
         }
 
-        public static bool SendRaycast<T>(Vector3 startPoint, Vector3 direction, out T hittedScript,
+        public static bool SendRaycast<T>(Vector2 startPoint, Vector2 direction, out T hittedScript,
             bool isDraw = false, Color drawColor = default) where T : class
         {
             drawColor = drawColor == default ? Color.red : drawColor;
             hittedScript = null;
-            RaycastHit[] hits = Physics.RaycastAll(startPoint, direction, Mathf.Infinity);
+            RaycastHit2D[] hits = Physics2D.RaycastAll(startPoint, direction, Mathf.Infinity);
 
             for (int i = 0; i < hits.Length; i++)
             {
@@ -54,12 +48,12 @@ namespace PanteonDemo
             return false;
         }
 
-        public static bool SendRaycastAll(Vector3 startPoint, Vector3 direction, LayerMask targetLayer,
+        public static bool SendRaycastAll(Vector2 startPoint, Vector2 direction, LayerMask targetLayer,
             out Transform[] hittedTransforms, bool isDraw = false, Color drawColor = default)
         {
             drawColor = drawColor == default ? Color.red : drawColor;
             hittedTransforms = null;
-            RaycastHit[] hits = Physics.RaycastAll(startPoint, direction, Mathf.Infinity, targetLayer);
+            RaycastHit2D[] hits = Physics2D.RaycastAll(startPoint, direction, Mathf.Infinity, targetLayer);
             hittedTransforms = new Transform[hits.Length];
 
             for (int i = 0; i < hits.Length; i++)
@@ -75,12 +69,12 @@ namespace PanteonDemo
             return false;
         }
 
-        public static bool SendRaycastAll<T>(Vector3 startPoint, Vector3 direction,
-            out List<T> hittedScrips, bool isDraw = false, Color drawColor = default) where T : class
+        public static bool SendRaycastAll<T>(Vector2 startPoint, Vector2 direction,
+            out List<T> hittedScripts, bool isDraw = false, Color drawColor = default) where T : class
         {
             drawColor = drawColor == default ? Color.red : drawColor;
-            hittedScrips = null;
-            RaycastHit[] hits = Physics.RaycastAll(startPoint, direction, Mathf.Infinity);
+            hittedScripts = null;
+            RaycastHit2D[] hits = Physics2D.RaycastAll(startPoint, direction, Mathf.Infinity);
 
             for (int i = 0; i < hits.Length; i++)
             {
@@ -88,26 +82,27 @@ namespace PanteonDemo
                 {
                     if (isDraw)
                         Debug.DrawRay(startPoint, direction * hits[i].distance, drawColor);
-                    hittedScrips.Add(hScript);
+                    hittedScripts.Add(hScript);
                 }
 
                 if (isDraw)
                     Debug.DrawRay(startPoint, direction * hits[i].distance, drawColor);
             }
 
-            if (hittedScrips.Count > 0)
+            if (hittedScripts.Count > 0)
                 return true;
 
             return false;
         }
-
+        
         public static bool DetectTouchedObject(Vector2 touchPosition, out Transform hittedTransform, int layerMask)
         {
-            Ray ray = Camera.main.ScreenPointToRay(touchPosition);
-            RaycastHit hit;
-            hittedTransform = null;
+            Vector2 origin = Camera.main.ScreenToWorldPoint(touchPosition);
+            RaycastHit2D hit = Physics2D.Raycast(origin, Vector2.zero, layerMask);
 
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
+            hittedTransform = null;
+            
+            if (hit.collider != null)
             {
                 hittedTransform = hit.transform;
                 return true;
@@ -119,11 +114,11 @@ namespace PanteonDemo
         public static bool DetectTouchedObject<T>(Vector2 touchPosition, out T hittedScript)
             where T : class
         {
-            Ray ray = Camera.main.ScreenPointToRay(touchPosition);
-            RaycastHit[] hits = Physics.RaycastAll(ray, Mathf.Infinity);
+            Vector2 origin = Camera.main.ScreenToWorldPoint(touchPosition);
+            RaycastHit2D[] hits = Physics2D.RaycastAll(origin, Vector2.zero);
             hittedScript = null;
 
-            foreach (RaycastHit hit in hits)
+            foreach (RaycastHit2D hit in hits)
             {
                 if (hit.transform.TryGetComponent(out T hitScript))
                 {
@@ -137,8 +132,8 @@ namespace PanteonDemo
 
         public static bool DetectTouchedObjects(Vector2 touchPosition, out Transform[] hittedTransform, int layerMask)
         {
-            Ray ray = Camera.main.ScreenPointToRay(touchPosition);
-            RaycastHit[] hits = Physics.RaycastAll(ray, Mathf.Infinity, layerMask);
+            Vector2 origin = Camera.main.ScreenToWorldPoint(touchPosition);
+            RaycastHit2D[] hits = Physics2D.RaycastAll(origin, Vector2.zero, layerMask);
             hittedTransform = new Transform[hits.Length];
 
             for (int i = 0; i < hits.Length; i++)
@@ -155,11 +150,11 @@ namespace PanteonDemo
         public static bool DetectTouchedObjects<T>(Vector2 touchPosition, out List<T> hittedScripts)
             where T : class
         {
-            Ray ray = Camera.main.ScreenPointToRay(touchPosition);
-            RaycastHit[] hits = Physics.RaycastAll(ray, Mathf.Infinity);
+            Vector2 origin = Camera.main.ScreenToWorldPoint(touchPosition);
+            RaycastHit2D[] hits = Physics2D.RaycastAll(origin, Vector2.zero);
             hittedScripts = new List<T>();
 
-            foreach (RaycastHit hit in hits)
+            foreach (RaycastHit2D hit in hits)
             {
                 if (hit.transform.TryGetComponent(out T hitScript))
                 {

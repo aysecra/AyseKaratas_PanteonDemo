@@ -494,7 +494,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1366730631895706158, guid: 6ba84fde4d2ab42f3ab9ce5f5dd78ac0, type: 3}
       propertyPath: m_Value
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1799685344843947330, guid: 6ba84fde4d2ab42f3ab9ce5f5dd78ac0, type: 3}
       propertyPath: m_AnchorMax.x
@@ -750,6 +750,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6ba84fde4d2ab42f3ab9ce5f5dd78ac0, type: 3}
+--- !u!1 &2382714056614444838 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6524544048209664624, guid: 6ba84fde4d2ab42f3ab9ce5f5dd78ac0, type: 3}
+  m_PrefabInstance: {fileID: 8906659848066196822}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &2880195539830239831 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6656968292575909633, guid: 6ba84fde4d2ab42f3ab9ce5f5dd78ac0, type: 3}
@@ -787,6 +792,10 @@ MonoBehaviour:
   _amountToPool: 0
   _isAllObjectActive: 0
   _scrollbar: {fileID: 7596822384518205304}
+  _imgInfo: {fileID: 4840905821195037874}
+  _txtName: {fileID: 6446301775988628993}
+  _txtInfo: {fileID: 2005834799897011065}
+  _productArea: {fileID: 2382714056614444838}
 --- !u!114 &7596822384518205304 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1366730631895706158, guid: 6ba84fde4d2ab42f3ab9ce5f5dd78ac0, type: 3}

@@ -1,18 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class GUIManager : MonoBehaviour
+namespace PanteonDemo
 {
-    // Start is called before the first frame update
-    void Start()
+    public class GUIManager : Singleton<GUIManager>
     {
-        
-    }
+        [SerializeField] private InformationArea _informationArea;
 
-    // Update is called once per frame
-    void Update()
-    {
+        private void Start()
+        {
+            _informationArea.ClearInfoArea();
+        }
+
+        public void SetInformationArea(Soldier soldier)
+        {
+            _informationArea.OpenInfo(soldier);
+        }
         
+        public void SetInformationArea(Building building)
+        {
+            _informationArea.OpenInfo(building);
+        }
     }
 }

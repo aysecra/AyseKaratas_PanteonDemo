@@ -32,6 +32,8 @@ namespace PanteonDemo
         private bool _isFinishMerging;
         private float _cellDistance;
 
+        public Vector3 CellSize => _grid.cellSize;
+
         public uint ColumnCount
         {
             get => _columnCount;
@@ -51,25 +53,6 @@ namespace PanteonDemo
         }
 
         public float CellDistance => _cellDistance;
-
-        // [Button(ButtonSizes.Medium)]
-        // public void Indexing()
-        // {
-        //     _cellList = new List<GridsCell>();
-        //     GetGridCells();
-        // }
-        //
-        // [Button(ButtonSizes.Medium)]
-        // public void Clear()
-        // {
-        //     while (_tilemap.transform.childCount > 0)
-        //     {
-        //         foreach (Transform child in _tilemap.transform)
-        //         {
-        //             DestroyImmediate(child.gameObject);
-        //         }
-        //     }
-        // }
 
         private void Start()
         {

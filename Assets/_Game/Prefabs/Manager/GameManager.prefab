@@ -209,22 +209,32 @@ MonoBehaviour:
     Image: {fileID: -474893265, guid: 46c0f24fe62634842861e959c6524ddd, type: 3}
     Health: 10
     Damage: 10
+    Info: 
   - Name: Soldier 2
     Image: {fileID: -3277226, guid: 46c0f24fe62634842861e959c6524ddd, type: 3}
     Health: 10
     Damage: 5
+    Info: 
   - Name: Soldier 3
     Image: {fileID: 1025467469, guid: 46c0f24fe62634842861e959c6524ddd, type: 3}
     Health: 10
     Damage: 2
+    Info: 
   _buildingElements:
   - Name: Barrack
     Column: 4
     Row: 4
     Health: 100
     Image: {fileID: -1947948582, guid: 46c0f24fe62634842861e959c6524ddd, type: 3}
+    Info: 'Barrack produces soldiers. '
+    Production:
+    - Name: Soldier 1
+    - Name: Soldier 2
+    - Name: Soldier 3
   - Name: Power Plant
     Column: 3
     Row: 2
     Health: 50
     Image: {fileID: 223569758, guid: 46c0f24fe62634842861e959c6524ddd, type: 3}
+    Info: 
+    Production: []

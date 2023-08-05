@@ -19,6 +19,15 @@ namespace PanteonDemo
             base.Start();
             AddButtons();
         }
+        
+        private void Update()
+        {
+            if (!_isBeginScrollbar && _scrollbar.value != 1)
+            {
+                _scrollbar.value = 1;
+                _isBeginScrollbar = true;
+            }
+        }
 
         private void AddButtons()
         {

@@ -1,9 +1,6 @@
 using System;
 using System.Collections.Generic;
-using PanteonDemo;
 using UnityEngine;
-using UnityEngine.Serialization;
-using UnityEngine.UI;
 
 [Serializable]
 public class PlayerData
@@ -19,15 +16,23 @@ public class Soldier
     public Sprite Image;
     public uint Health;
     public uint Damage;
+    public string Info = "";
 }
 
 [Serializable]
 public class SoldierType
 {
-    [SerializeField,  StringInList(typeof(PropertyDrawersHelper), "AllSoldierNames")]
+    [SerializeField, StringInList(typeof(PropertyDrawersHelper), "AllSoldierNames")]
     public string Name;
 
     public GameObject SoldierObject;
+}
+[Serializable]
+public class SoldierName
+{
+    [SerializeField, StringInList(typeof(PropertyDrawersHelper), "AllSoldierNames")]
+    public string Name;
+
 }
 
 [Serializable]
@@ -38,13 +43,14 @@ public class Building
     public uint Row;
     public uint Health;
     public Sprite Image;
-    private List<dynamic> Production;
+    public string Info = "";
+    public List<SoldierName> Production = new List<SoldierName>();
 }
 
 [Serializable]
 public class BuildingType
 {
-    [SerializeField,  StringInList(typeof(PropertyDrawersHelper), "AllBuildingNames")]
+    [SerializeField, StringInList(typeof(PropertyDrawersHelper), "AllBuildingNames")]
     public string Name;
 
     public GameObject SoldierObject;

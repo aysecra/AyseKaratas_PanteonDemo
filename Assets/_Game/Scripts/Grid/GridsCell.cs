@@ -33,7 +33,7 @@ namespace PanteonDemo
         [Header("Cell Info")] [SerializeField] private uint _row;
         [SerializeField] private uint _column;
 
-        [SerializeField] private GridsCellBase _gridsCellBase;
+        private GridsCellBase _gridsCellBase;
         private GridSystem _gridSystem;
 
         public uint Column

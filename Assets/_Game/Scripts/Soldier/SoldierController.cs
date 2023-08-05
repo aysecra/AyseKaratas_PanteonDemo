@@ -12,7 +12,13 @@ namespace PanteonDemo
         
         [Header("Selectable Elements")]
         [SerializeField,  StringInList(typeof(PropertyDrawersHelper), "AllSoldierNames")]
-        public string _currentSoldierName;
+        private string _currentSoldierName;
+
+        private Soldier _currentSoldier;
+
+        public Soldier CurrentSoldier => _currentSoldier;
+        
+
         public void Move(Vector3[] path, float durationPerCell)
         {
             transform.DOPath(path, durationPerCell * path.Length);
@@ -20,7 +26,7 @@ namespace PanteonDemo
 
         private void Start()
         {
-            SetSoldierType(_currentSoldierName);
+            SetType(_currentSoldierName);
         }
 
         private void OnValidate()
@@ -28,11 +34,29 @@ namespace PanteonDemo
             SetSoldierType(_currentSoldierName);
         }
 
-        public void SetSoldierType(string soldierName)
+        public void SetType(string soldierName)
+        {
+            SetSoldierType(soldierName);
+            SetCurrentSoldier();
+        }
+
+        private void SetSoldierType(string soldierName)
         {
             foreach (SoldierType soldierType in _soldierTypes)
             {
                 soldierType.SoldierObject.SetActive(soldierName == soldierType.Name);
+            }
+        }
+
+        private void SetCurrentSoldier()
+        {
+            foreach (var soldier in SharedLevelManager.Instance.SoldierUnits)
+            {
+                if (soldier.Name == _currentSoldierName)
+                {
+                    _currentSoldier = soldier;
+                    break;
+                }
             }
         }
     }
