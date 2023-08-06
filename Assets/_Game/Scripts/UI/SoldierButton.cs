@@ -26,7 +26,7 @@ namespace PanteonDemo
         public void OnButtonClicked()
         {
             GridsCell cell = GridSystem.Instance.GetEmptyACell();
-            SoldierController soldier =  SharedLevelManager.Instance.SpawnSoldier(_currentSoldierData.Name, cell.transform.position);
+            SoldierController soldier =  SharedLevelManager.Instance.SpawnElement<SoldierController>(_currentSoldierData.Name, cell.transform.position);
             cell.CellBase.IsWalkable = false;
             soldier.PlacedCell = cell;
         }

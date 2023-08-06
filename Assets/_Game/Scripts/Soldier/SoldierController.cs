@@ -24,10 +24,7 @@ namespace PanteonDemo
         public void Move(Vector3[] path, GridsCell targetCell)
         {
             transform.DOPath(path, _durationPerCell * path.Length)
-                .OnStart((() =>
-                {
-                    PlayerController.Instance.IsClickable = false;
-                }))
+                .OnStart((() => { PlayerController.Instance.IsClickable = false; }))
                 .OnComplete((() =>
                 {
                     PlayerController.Instance.IsClickable = true;
@@ -72,10 +69,6 @@ namespace PanteonDemo
                     break;
                 }
             }
-        }
-
-        public void SpawnSoldier()
-        {
         }
     }
 }

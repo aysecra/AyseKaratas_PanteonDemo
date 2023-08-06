@@ -35,7 +35,6 @@ namespace PanteonDemo
         {
             List<GridsCellBase> pathCell = Pathfinding.FindPath(soldierController.PlacedCell.CellBase, cell.CellBase);
             Vector3[] path = new Vector3[pathCell.Count];
-            print(pathCell.Count);
 
             for (int i = 0; i < pathCell.Count; i++)
             {

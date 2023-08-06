@@ -152,7 +152,7 @@ namespace PanteonDemo
         }
 
         #endregion
-        
+
         // get specific cell according to row and column
         public GridsCell GetCell(int row, int column)
         {
@@ -161,11 +161,12 @@ namespace PanteonDemo
             return null;
         }
 
+        // returns a placable / clear cell
         public GridsCell GetEmptyACell()
         {
-            for (int i = 0; i <= _rowCount; i++)
+            for (int i = 0; i < _rowCount; i++)
             {
-                for (int j = 0; j <= _columnCount; j++)
+                for (int j = 0; j < _columnCount; j++)
                 {
                     if (_cellArray[i, j].CellBase.IsWalkable)
                         return _cellArray[i, j];
@@ -175,7 +176,31 @@ namespace PanteonDemo
             return null;
         }
 
-        // returns is can place / clear area
+        // returns a placable / clear area
+        public List<GridsCell> GetEmptyArea(uint rowCount, uint columnCount)
+        {
+            int rowCounter = 0;
+            int columnCounter = 0;
+
+            for (int i = 0; i < _rowCount; i++)
+            {
+                for (int j = 0; j < _columnCount; j++)
+                {
+                    if (_cellArray[i, j].CellBase.IsWalkable)
+                    {
+                        if (IsClearArea(i, i + (int) rowCount - 1, j, j + (int) columnCount - 1,
+                                out List<GridsCell> cellList))
+                        {
+                            return cellList;
+                        }
+                    }
+                }
+            }
+
+            return null;
+        }
+
+        // returns is can placable / clear area
         public bool IsClearArea(int minRow, int maxRow, int minColumn, int maxColumn)
         {
             if (minRow >= 0 && minRow < _rowCount && minColumn >= 0 && minColumn < _columnCount &&
@@ -195,7 +220,31 @@ namespace PanteonDemo
 
             return false;
         }
-        
+
+        // returns is can placable / clear area
+        private bool IsClearArea(int minRow, int maxRow, int minColumn, int maxColumn, out List<GridsCell> cellList)
+        {
+            cellList = new List<GridsCell>();
+            if (minRow >= 0 && minRow < _rowCount && minColumn >= 0 && minColumn < _columnCount &&
+                maxRow >= 0 && maxRow < _rowCount && maxColumn >= 0 && maxColumn < _columnCount)
+            {
+                for (int i = minRow; i <= maxRow; i++)
+                {
+                    for (int j = minColumn; j <= maxColumn; j++)
+                    {
+                        if (!_cellArray[i, j].CellBase.IsWalkable)
+                            return false;
+
+                        cellList.Add(_cellArray[i, j]);
+                    }
+                }
+
+                return true;
+            }
+
+            return false;
+        }
+
         // set not walkable area
         public void PlaceMultipleCellArea(int minRow, int maxRow, int minColumn, int maxColumn)
         {

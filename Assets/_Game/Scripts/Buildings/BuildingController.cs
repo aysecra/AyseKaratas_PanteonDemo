@@ -120,6 +120,7 @@ namespace PanteonDemo
         private GridsCell _currentCell;
         private MultipleCellPlacement _multipleCellPlacement;
 
+        public List<GridsCell> PlacedCellList { get; set; }
         public Building CurrentBuilding => _currentBuilding;
 
         private void Start()
@@ -141,9 +142,14 @@ namespace PanteonDemo
         // set build type by name that can be changed from other classes
         public void SetType(string buildingName)
         {
+            _currentBuildingName = buildingName;
             SetBuildingType(buildingName);
             SetCollider(buildingName);
             SetCurrentBuilding();
+        }
+
+        public void SetPosition()
+        {
         }
 
         // open to object by name
@@ -205,7 +211,6 @@ namespace PanteonDemo
 
                     if (isPlacable)
                     {
-                        
                     }
                 }
             }

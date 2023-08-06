@@ -17,7 +17,7 @@ namespace PanteonDemo
 
         private List<SoldierController> _spawnedSoldiers = new List<SoldierController>();
         private List<BuildingController> _spawnedBuildings = new List<BuildingController>();
-        
+
         public List<Soldier> SoldierUnits => _soldierUnits;
         public List<Building> BuildingElements => _buildingElements;
 
@@ -33,7 +33,7 @@ namespace PanteonDemo
 
             return null;
         }
-        
+
         public Soldier GetSoldier(string name)
         {
             foreach (Soldier soldier in SoldierUnits)
@@ -46,14 +46,28 @@ namespace PanteonDemo
 
             return null;
         }
-        
-        public SoldierController SpawnSoldier(string name, Vector3 position)
+
+        public T SpawnElement<T>(string name, Vector3 position) where T : PoolableObject
         {
-            SoldierController newSoldier = (SoldierController)_soldierPool.GetPooledObject();
-            newSoldier.transform.position = position;
-            newSoldier.SetType(name);
-            newSoldier.gameObject.SetActive(true);
-            return newSoldier;
+            T newElement = null;
+            if (typeof(T) == typeof(SoldierController))
+            {
+                newElement = (T) _soldierPool.GetPooledObject();
+                (newElement as SoldierController).SetType(name);
+            }
+            else if (typeof(T) == typeof(BuildingController))
+            {
+                newElement = (T) _buildingPool.GetPooledObject();
+                (newElement as BuildingController).SetType(name);
+            }
+
+            if (newElement != null)
+            {
+                newElement.transform.position = position;
+                newElement.gameObject.SetActive(true);
+            }
+
+            return newElement;
         }
     }
 }
