@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [Serializable]
 public class PlayerData
@@ -27,12 +28,12 @@ public class SoldierType
 
     public GameObject SoldierObject;
 }
+
 [Serializable]
 public class SoldierName
 {
     [SerializeField, StringInList(typeof(PropertyDrawersHelper), "AllSoldierNames")]
     public string Name;
-
 }
 
 [Serializable]
@@ -53,5 +54,6 @@ public class BuildingType
     [SerializeField, StringInList(typeof(PropertyDrawersHelper), "AllBuildingNames")]
     public string Name;
 
-    public GameObject SoldierObject;
+    public GameObject BuildingObject;
+    public Transform RaycastPoint;
 }

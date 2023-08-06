@@ -223,6 +223,7 @@ MonoBehaviour:
   - Name: Soldier 3
     SoldierObject: {fileID: 6775363218730111844}
   _currentSoldierName: Soldier 1
+  PlacedCell: {fileID: 0}
 --- !u!61 &6425979417601203810
 BoxCollider2D:
   m_ObjectHideFlags: 0

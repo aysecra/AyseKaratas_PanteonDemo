@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 namespace PanteonDemo
 {
@@ -28,17 +30,19 @@ namespace PanteonDemo
                 {
                     GridsCellBase currentPathTile = targetCell;
                     List<GridsCellBase> path = new List<GridsCellBase>();
+
                     while (currentPathTile != startCell)
                     {
                         path.Add(currentPathTile);
                         currentPathTile = currentPathTile.Connection;
                     }
 
+                    path.Reverse();
                     return path;
                 }
 
                 IEnumerable<GridsCellBase> walkableNeighbors =
-                    currentCell.Neighbors.Where(cell => cell.Walkable && !processed.Contains((cell)));
+                    currentCell.Neighbors.Where(cell => cell.IsWalkable && !processed.Contains((cell)));
 
                 foreach (var neighbor in walkableNeighbors)
                 {

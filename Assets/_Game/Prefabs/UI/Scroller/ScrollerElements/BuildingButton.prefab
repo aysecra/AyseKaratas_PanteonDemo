@@ -190,8 +190,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ClocknestGames.Game.Core.CharacterButton, Assembly-CSharp
+      - m_Target: {fileID: 2060296715191847573}
+        m_TargetAssemblyTypeName: PanteonDemo.BuildingButton, Assembly-CSharp
         m_MethodName: OnButtonClicked
         m_Mode: 1
         m_Arguments:

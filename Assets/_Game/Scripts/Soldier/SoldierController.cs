@@ -7,21 +7,34 @@ namespace PanteonDemo
 {
     public class SoldierController : PoolableObject
     {
-        [Header("Core Elements")]
-        [SerializeField] private List<SoldierType> _soldierTypes = new List<SoldierType>();
-        
-        [Header("Selectable Elements")]
-        [SerializeField,  StringInList(typeof(PropertyDrawersHelper), "AllSoldierNames")]
+        [Header("Core Elements")] [SerializeField]
+        private List<SoldierType> _soldierTypes = new List<SoldierType>();
+
+        [Header("Selectable Elements")] [SerializeField, StringInList(typeof(PropertyDrawersHelper), "AllSoldierNames")]
         private string _currentSoldierName;
+
+        [SerializeField] private float _durationPerCell = .25f;
 
         private Soldier _currentSoldier;
 
+        public GridsCell PlacedCell { get; set; }
         public Soldier CurrentSoldier => _currentSoldier;
-        
 
-        public void Move(Vector3[] path, float durationPerCell)
+
+        public void Move(Vector3[] path, GridsCell targetCell)
         {
-            transform.DOPath(path, durationPerCell * path.Length);
+            transform.DOPath(path, _durationPerCell * path.Length)
+                .OnStart((() =>
+                {
+                    PlayerController.Instance.IsClickable = false;
+                }))
+                .OnComplete((() =>
+                {
+                    PlayerController.Instance.IsClickable = true;
+                    PlacedCell.CellBase.IsWalkable = true;
+                    targetCell.CellBase.IsWalkable = false;
+                    PlacedCell = targetCell;
+                }));
         }
 
         private void Start()
@@ -36,6 +49,7 @@ namespace PanteonDemo
 
         public void SetType(string soldierName)
         {
+            _currentSoldierName = soldierName;
             SetSoldierType(soldierName);
             SetCurrentSoldier();
         }
@@ -58,6 +72,10 @@ namespace PanteonDemo
                     break;
                 }
             }
+        }
+
+        public void SpawnSoldier()
+        {
         }
     }
 }

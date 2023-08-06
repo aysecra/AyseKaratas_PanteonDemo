@@ -164,12 +164,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _row: 0
   _column: 0
-  _gridsCellBase:
-    CellObjectScript: {fileID: 0}
-    G: 0
-    H: 0
-    Walkable: 0
-    Neighbors: []
 --- !u!61 &-6479683393857939960
 BoxCollider2D:
   m_ObjectHideFlags: 0

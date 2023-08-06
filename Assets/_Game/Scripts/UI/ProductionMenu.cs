@@ -15,13 +15,17 @@ namespace PanteonDemo
         
         protected override void Start()
         {
+            // get amount to pool from shared level manager
             amountToPool = (uint) SharedLevelManager.Instance.BuildingElements.Count;
+            // set pool
             base.Start();
+            // open buttons from pool
             AddButtons();
         }
         
         private void Update()
         {
+            // set scroller to begining point
             if (!_isBeginScrollbar && _scrollbar.value != 1)
             {
                 _scrollbar.value = 1;
@@ -29,6 +33,7 @@ namespace PanteonDemo
             }
         }
 
+        // open multiple button
         private void AddButtons()
         {
             for (int i = 0; i < amountToPool; i++)
@@ -38,6 +43,7 @@ namespace PanteonDemo
             }
         }
 
+        // open a building spawn button
         private void AddButton(Building building)
         {
             BuildingButton newBuildingButton = (BuildingButton) GetPooledObject();

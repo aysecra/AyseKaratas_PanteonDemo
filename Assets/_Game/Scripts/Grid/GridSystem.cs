@@ -152,13 +152,64 @@ namespace PanteonDemo
         }
 
         #endregion
-
-
+        
+        // get specific cell according to row and column
         public GridsCell GetCell(int row, int column)
         {
             if (column >= 0 && column < _columnCount && row >= 0 && row < _rowCount)
                 return _cellArray[row, column];
             return null;
+        }
+
+        public GridsCell GetEmptyACell()
+        {
+            for (int i = 0; i <= _rowCount; i++)
+            {
+                for (int j = 0; j <= _columnCount; j++)
+                {
+                    if (_cellArray[i, j].CellBase.IsWalkable)
+                        return _cellArray[i, j];
+                }
+            }
+
+            return null;
+        }
+
+        // returns is can place / clear area
+        public bool IsClearArea(int minRow, int maxRow, int minColumn, int maxColumn)
+        {
+            if (minRow >= 0 && minRow < _rowCount && minColumn >= 0 && minColumn < _columnCount &&
+                maxRow >= 0 && maxRow < _rowCount && maxColumn >= 0 && maxColumn < _columnCount)
+            {
+                for (int i = minRow; i <= maxRow; i++)
+                {
+                    for (int j = minColumn; j <= maxColumn; j++)
+                    {
+                        if (!_cellArray[i, j].CellBase.IsWalkable)
+                            return false;
+                    }
+                }
+
+                return true;
+            }
+
+            return false;
+        }
+        
+        // set not walkable area
+        public void PlaceMultipleCellArea(int minRow, int maxRow, int minColumn, int maxColumn)
+        {
+            if (minRow >= 0 && minRow < _rowCount && minColumn >= 0 && minColumn < _columnCount &&
+                maxRow >= 0 && maxRow < _rowCount && maxColumn >= 0 && maxColumn < _columnCount)
+            {
+                for (int i = minRow; i <= maxRow; i++)
+                {
+                    for (int j = minColumn; j <= maxColumn; j++)
+                    {
+                        _cellArray[i, j].CellBase.IsWalkable = false;
+                    }
+                }
+            }
         }
     }
 }

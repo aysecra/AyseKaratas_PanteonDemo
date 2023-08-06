@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace PanteonDemo
 {
@@ -17,7 +18,7 @@ namespace PanteonDemo
         // distance from the cell to the target cell 
         public float H;
         public float F => G + H;
-        public bool Walkable = true;
+        public bool IsWalkable = true;
 
         public List<GridsCellBase> Neighbors;
 

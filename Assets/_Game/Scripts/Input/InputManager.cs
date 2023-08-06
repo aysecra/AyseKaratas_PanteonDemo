@@ -59,6 +59,8 @@ namespace PanteonDemo
             {
                 case InputType.MouseAndKeyboard:
                     DetectMouseInput(0);
+                    DetectMouseInput(1);
+                    DetectMouseInput(2);
                     break;
                 case InputType.MobileFinger:
                     DetectTouchInput();

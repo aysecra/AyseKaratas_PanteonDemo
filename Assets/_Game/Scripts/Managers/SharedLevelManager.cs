@@ -15,6 +15,9 @@ namespace PanteonDemo
 
         [SerializeField] private List<Building> _buildingElements = new List<Building>();
 
+        private List<SoldierController> _spawnedSoldiers = new List<SoldierController>();
+        private List<BuildingController> _spawnedBuildings = new List<BuildingController>();
+        
         public List<Soldier> SoldierUnits => _soldierUnits;
         public List<Building> BuildingElements => _buildingElements;
 
@@ -33,7 +36,7 @@ namespace PanteonDemo
         
         public Soldier GetSoldier(string name)
         {
-            foreach (Soldier soldier in SharedLevelManager.Instance.SoldierUnits)
+            foreach (Soldier soldier in SoldierUnits)
             {
                 if (soldier.Name == name)
                 {
@@ -42,6 +45,15 @@ namespace PanteonDemo
             }
 
             return null;
+        }
+        
+        public SoldierController SpawnSoldier(string name, Vector3 position)
+        {
+            SoldierController newSoldier = (SoldierController)_soldierPool.GetPooledObject();
+            newSoldier.transform.position = position;
+            newSoldier.SetType(name);
+            newSoldier.gameObject.SetActive(true);
+            return newSoldier;
         }
     }
 }
