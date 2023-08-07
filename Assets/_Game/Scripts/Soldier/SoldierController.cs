@@ -125,7 +125,10 @@ namespace PanteonDemo
             _currentHealth = _currentHealth - damage > 0 ? _currentHealth - damage : 0;
             _healthbar.fillAmount = (float) _currentHealth / _currentSoldier.Health;
             if(_currentHealth == 0)
+            {
                 gameObject.SetActive(false);
+                PlacedCell.CellBase.IsWalkable = true;
+            }
         }
     }
 }
