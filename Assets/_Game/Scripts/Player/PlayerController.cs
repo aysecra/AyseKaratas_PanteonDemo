@@ -51,7 +51,7 @@ namespace PanteonDemo
                         _isStartSwipe = true;
                     }
 
-                    if (cell != _buildingCell)
+                    if (_buildingCell != null && cell != _buildingCell)
                     {
                         _buildingController.SetPositionWithDownLeftCell((int) cell.Row - (int) _buildingCell.Row,
                             (int) cell.Column - (int) _buildingCell.Column, cell.transform.position);
@@ -108,7 +108,7 @@ namespace PanteonDemo
                 if (target != null)
                     break;
             }
-            
+
             if (target != null)
             {
                 List<GridsCellBase> pathCellList =
@@ -186,6 +186,7 @@ namespace PanteonDemo
                     if (Raycast2DManager.DetectTouchedObject(_firstLeftClickPosition,
                             out SoldierController soldierController))
                     {
+                        soldierController.OpenClickedArea();
                         _clickedObject = soldierController.gameObject;
                         OnLeftClickSoldier(soldierController);
                     }
@@ -193,6 +194,10 @@ namespace PanteonDemo
                     else if (Raycast2DManager.DetectTouchedObject(_firstLeftClickPosition,
                                  out BuildingController buildingController))
                     {
+                        if (_clickedObject != null && _clickedObject.TryGetComponent(out SoldierController soldier))
+                        {
+                            soldier.CloseClickedArea();
+                        }
                         _clickedObject = buildingController.gameObject;
                         OnLeftClickBuilding(buildingController);
                     }
@@ -209,6 +214,7 @@ namespace PanteonDemo
                         if (_clickedObject != null && _clickedObject.TryGetComponent(out SoldierController soldier))
                         {
                             OnRightClickBuilding(buildingController, soldier);
+                            _clickedObject = null;
                         }
                     }
 
@@ -217,7 +223,9 @@ namespace PanteonDemo
                     {
                         if (_clickedObject != null && _clickedObject.TryGetComponent(out SoldierController soldier))
                         {
-                            OnRightClickSoldier(soldier1, soldier);
+                            if (soldier != soldier1)
+                                OnRightClickSoldier(soldier1, soldier);
+                            _clickedObject = null;
                         }
                     }
 
@@ -226,6 +234,7 @@ namespace PanteonDemo
                         if (_clickedObject != null && _clickedObject.TryGetComponent(out SoldierController soldier))
                         {
                             OnRightClickCell(cell, soldier);
+                            _clickedObject = null;
                         }
                     }
                 }

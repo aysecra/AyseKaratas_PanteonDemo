@@ -172,15 +172,19 @@ namespace PanteonDemo
             Vector3 position = downLeftCorner + changingDist;
             transform.position = position;
 
-            if (_multipleCellPlacement.IsPlacable(rowChangeAmount, columnChangeAmount))
+            if (Raycast2DManager.SendRaycast(_currentBuildingType.RaycastPoint.position + Vector3.back * .5f,
+                    Vector3.forward, out GridsCell cell))
             {
-                _currentBuildingType.ConfirmPlacementArea.SetActive(true);
-                _currentBuildingType.DeclinePlacementArea.SetActive(false);
-            }
-            else
-            {
-                _currentBuildingType.ConfirmPlacementArea.SetActive(false);
-                _currentBuildingType.DeclinePlacementArea.SetActive(true);
+                if (_multipleCellPlacement.PlacementFromDownLeftCell((int) cell.Row, (int) cell.Column))
+                {
+                    _currentBuildingType.ConfirmPlacementArea.SetActive(true);
+                    _currentBuildingType.DeclinePlacementArea.SetActive(false);
+                }
+                else
+                {
+                    _currentBuildingType.ConfirmPlacementArea.SetActive(false);
+                    _currentBuildingType.DeclinePlacementArea.SetActive(true);
+                }
             }
         }
 

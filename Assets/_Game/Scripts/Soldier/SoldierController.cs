@@ -11,6 +11,7 @@ namespace PanteonDemo
         private List<SoldierType> _soldierTypes = new List<SoldierType>();
 
         [SerializeField] private Image _healthbar;
+        [SerializeField] private GameObject _soldierClickArea;
 
         [Header("Selectable Elements")] [SerializeField, StringInList(typeof(PropertyDrawersHelper), "AllSoldierNames")]
         private string _currentSoldierName;
@@ -25,12 +26,23 @@ namespace PanteonDemo
 
         private void Start()
         {
+            CloseClickedArea();
             SetType(_currentSoldierName);
         }
 
         private void OnValidate()
         {
             SetSoldierType(_currentSoldierName);
+        }
+
+        public void OpenClickedArea()
+        {
+            _soldierClickArea.SetActive(true);
+        }
+        
+        public void CloseClickedArea()
+        {
+            _soldierClickArea.SetActive(false);
         }
 
         public void SetType(string soldierName)
@@ -74,6 +86,7 @@ namespace PanteonDemo
                     PlacedCell.CellBase.IsWalkable = true;
                     targetCell.CellBase.IsWalkable = false;
                     PlacedCell = targetCell;
+                    CloseClickedArea();
                 }));
         }
 
@@ -88,6 +101,7 @@ namespace PanteonDemo
                     PlacedCell.CellBase.IsWalkable = true;
                     targetCell.CellBase.IsWalkable = false;
                     PlacedCell = targetCell;
+                    CloseClickedArea();
                     HitToElement(element);
                 }));
         }
