@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace PanteonDemo
 {
@@ -31,8 +30,8 @@ namespace PanteonDemo
     public class GridsCell : MonoBehaviour
         , EventListener<GridCellsIndexCalcEvent>
     {
-        [Header("Cell Info")] [SerializeField] private uint _row;
-        [SerializeField] private uint _column;
+        private uint _row;
+        private uint _column;
 
         private GridsCellBase _gridsCellBase;
         private GridSystem _gridSystem;
@@ -86,6 +85,7 @@ namespace PanteonDemo
             }
 
             _gridsCellBase.Neighbors = neighbours;
+            gameObject.name = $"{gameObject.name}({_row},{_column})";
         }
 
         public void SetCellBase()

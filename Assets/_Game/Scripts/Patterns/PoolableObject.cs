@@ -27,7 +27,7 @@ namespace PanteonDemo
             DestroyObject();
         }
 
-        private void OnEnable()
+        protected virtual void OnEnable()
         {
             if (_lifeTime > 0)
             {

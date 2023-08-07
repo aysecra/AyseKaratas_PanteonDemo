@@ -67,6 +67,7 @@ MonoBehaviour:
   _imgElement: {fileID: 6074369441396428228}
   _textTitle: {fileID: 773443386842397130}
   _textHealth: {fileID: 8141415399248208757}
+  _button: {fileID: 1345745901478337593}
 --- !u!1 &771053539749584069
 GameObject:
   m_ObjectHideFlags: 0

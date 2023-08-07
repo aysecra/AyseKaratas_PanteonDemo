@@ -1263,6 +1263,7 @@ MonoBehaviour:
   _textTitle: {fileID: 6443043483559716848}
   _textHealth: {fileID: 2534828861539024207}
   _textDamage: {fileID: 2049939922015403135}
+  _button: {fileID: 4718813105535615491}
 --- !u!1 &6806331827368359716
 GameObject:
   m_ObjectHideFlags: 0

@@ -105,28 +105,25 @@ namespace PanteonDemo
             {
                 TouchState state = mouseButtonData == 0 ? TouchState.LeftClick :
                     mouseButtonData == 1 ? TouchState.RightClick : TouchState.MiddleClick;
-                
+
                 int mouseButton = (int) mouseButtonData;
-
-                if (Input.GetMouseButton(mouseButton))
+                
+                if (Input.GetMouseButtonDown(mouseButton))
                 {
-                    if (Input.GetMouseButtonDown(mouseButton))
-                    {
-                        _firstPosition = Input.mousePosition;
-                        EventManager.TriggerEvent(new InputEvent(state, _firstPosition));
-                    }
-
-                    else if (Input.GetMouseButtonUp(mouseButton))
-                    {
-                        _endPosition = Input.mousePosition;
-                        EventManager.TriggerEvent(new InputEvent(TouchState.End, _endPosition));
-                    }
-
-                    _currentPosition = Input.mousePosition;
-                    _swipeVector = _currentPosition - _firstPosition;
-                    _swipeLength = Vector3.Distance(_currentPosition, _firstPosition);
-                    _swipeDirection = _swipeVector.normalized;
+                    _firstPosition = Input.mousePosition;
+                    EventManager.TriggerEvent(new InputEvent(state, _firstPosition));
                 }
+
+                if (Input.GetMouseButtonUp(mouseButton))
+                {
+                    _endPosition = Input.mousePosition;
+                    EventManager.TriggerEvent(new InputEvent(TouchState.End, _endPosition));
+                }
+
+                _currentPosition = Input.mousePosition;
+                _swipeVector = _currentPosition - _firstPosition;
+                _swipeLength = Vector3.Distance(_currentPosition, _firstPosition);
+                _swipeDirection = _swipeVector.normalized;
             }
         }
     }

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 [Serializable]
 public class PlayerData
@@ -56,4 +57,7 @@ public class BuildingType
 
     public GameObject BuildingObject;
     public Transform RaycastPoint;
+    [FormerlySerializedAs("AcceptPlacementArea")] public GameObject ConfirmPlacementArea;
+    public GameObject DeclinePlacementArea;
+    public Image Healthbar;
 }

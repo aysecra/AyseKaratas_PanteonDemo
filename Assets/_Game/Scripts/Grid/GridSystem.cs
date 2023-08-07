@@ -176,6 +176,25 @@ namespace PanteonDemo
             return null;
         }
 
+        // returns a placable / clear cell from begining point
+        public GridsCell GetEmptyACell(int row, int column)
+        {
+            bool isBeginColumn = false;
+            if (row >= 0 && row < _rowCount && column >= 0 && column < _columnCount)
+                for (int i = row; i < _rowCount; i++)
+                {
+                    for (int j = 0; j < _columnCount; j++)
+                    {
+                        if (j == column)
+                            isBeginColumn = true;
+                        if (isBeginColumn && _cellArray[i, j].CellBase.IsWalkable)
+                            return _cellArray[i, j];
+                    }
+                }
+
+            return null;
+        }
+
         // returns a placable / clear area
         public List<GridsCell> GetEmptyArea(uint rowCount, uint columnCount)
         {
@@ -201,28 +220,7 @@ namespace PanteonDemo
         }
 
         // returns is can placable / clear area
-        public bool IsClearArea(int minRow, int maxRow, int minColumn, int maxColumn)
-        {
-            if (minRow >= 0 && minRow < _rowCount && minColumn >= 0 && minColumn < _columnCount &&
-                maxRow >= 0 && maxRow < _rowCount && maxColumn >= 0 && maxColumn < _columnCount)
-            {
-                for (int i = minRow; i <= maxRow; i++)
-                {
-                    for (int j = minColumn; j <= maxColumn; j++)
-                    {
-                        if (!_cellArray[i, j].CellBase.IsWalkable)
-                            return false;
-                    }
-                }
-
-                return true;
-            }
-
-            return false;
-        }
-
-        // returns is can placable / clear area
-        private bool IsClearArea(int minRow, int maxRow, int minColumn, int maxColumn, out List<GridsCell> cellList)
+        public bool IsClearArea(int minRow, int maxRow, int minColumn, int maxColumn, out List<GridsCell> cellList)
         {
             cellList = new List<GridsCell>();
             if (minRow >= 0 && minRow < _rowCount && minColumn >= 0 && minColumn < _columnCount &&
@@ -234,7 +232,6 @@ namespace PanteonDemo
                     {
                         if (!_cellArray[i, j].CellBase.IsWalkable)
                             return false;
-
                         cellList.Add(_cellArray[i, j]);
                     }
                 }

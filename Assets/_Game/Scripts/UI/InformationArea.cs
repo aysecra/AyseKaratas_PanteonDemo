@@ -50,7 +50,7 @@ namespace PanteonDemo
             _imgInfo.gameObject.SetActive(true);
         }
 
-        public void OpenInfo(Building infoElement)
+        public void OpenInfo(Building infoElement, BuildingController selectedBuilding)
         {
             OpenInfoArea();
             _imgInfo.sprite = infoElement.Image;
@@ -69,7 +69,7 @@ namespace PanteonDemo
                 if (soldierList.Count > 0)
                 {
                     _productArea.SetActive(true);
-                    AddButtons(soldierList);
+                    AddButtons(soldierList,selectedBuilding);
                 }
                 else
                 {
@@ -91,21 +91,21 @@ namespace PanteonDemo
             _txtName.text = infoElement.Name;
         }
 
-        private void AddButtons(List<Soldier> productList)
+        private void AddButtons(List<Soldier> productList, BuildingController selectedBuilding)
         {
             for (int i = 0; i < productList.Count; i++)
             {
                 Soldier soldier = productList[i];
-                AddButton(soldier);
+                AddButton(soldier,selectedBuilding);
             }
         }
 
-        private void AddButton(Soldier soldier)
+        private void AddButton(Soldier soldier, BuildingController selectedBuilding)
         {
             SoldierButton newSoldierButton = (SoldierButton) GetPooledObject();
             newSoldierButton.gameObject.SetActive(true);
             _scrollerElements.Add(newSoldierButton);
-            newSoldierButton.SetElementValue(soldier);
+            newSoldierButton.SetElementValue(soldier,selectedBuilding);
         }
 
         private void CloseAllButton()

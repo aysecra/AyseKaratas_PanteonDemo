@@ -82,7 +82,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5189610732730565326}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2540360656684604934}
+        m_TargetAssemblyTypeName: PanteonDemo.GUIManager, Assembly-CSharp
+        m_MethodName: OnClickPlacementDeclineButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2540360656124755441
 GameObject:
   m_ObjectHideFlags: 0
@@ -239,6 +251,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _informationArea: {fileID: 8758061178302432876}
+  _placementArea: {fileID: 5858404744761240365}
 --- !u!1 &2540360656730791191
 GameObject:
   m_ObjectHideFlags: 0
@@ -634,7 +647,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6598610249410496636}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2540360656684604934}
+        m_TargetAssemblyTypeName: PanteonDemo.GUIManager, Assembly-CSharp
+        m_MethodName: OnClickPlacementConfirmButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6045151009783474478
 GameObject:
   m_ObjectHideFlags: 0
