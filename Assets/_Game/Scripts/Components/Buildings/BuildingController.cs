@@ -70,7 +70,7 @@ namespace PanteonDemo
             TopRight = new ObjectCellInfo(gridColumn, gridRow);
         }
 
-        // place building from use down left cell info
+        // place buildingData from use down left cell info
         private void PlaceFromDownLeftCell(int rowDL, int columnDL)
         {
             DownLeft.SetRowAndColumn(rowDL, columnDL);
@@ -126,14 +126,14 @@ namespace PanteonDemo
 
         private uint _columnCount;
         private uint _rowCount;
-        private Building _currentBuilding;
+        private BuildingData _currentBuildingData;
         private BuildingType _currentBuildingType;
         private GridsCell _currentCell;
         private MultipleCellPlacement _multipleCellPlacement;
         private bool _isBuildingPlaced = false;
 
         public List<GridsCell> PlacedCellList;
-        public Building CurrentBuilding => _currentBuilding;
+        public BuildingData CurrentBuildingData => _currentBuildingData;
 
         public BuildingType CurrentBuildingType => _currentBuildingType;
         private int _currentHealth;
@@ -228,41 +228,41 @@ namespace PanteonDemo
             }
         }
 
-        // set collider size according to building type and its size
+        // set collider size according to buildingData type and its size
         private void SetCollider(string buildingName)
         {
-            Building building = SharedLevelManager.Instance.GetBuilding(buildingName);
+            BuildingData buildingData = SharedLevelManager.Instance.GetBuilding(buildingName);
 
-            if (building != null)
+            if (buildingData != null)
             {
                 float size = GridSystem.Instance.CellSize.x;
-                _rowCount = building.Row;
-                _columnCount = building.Column;
+                _rowCount = buildingData.Row;
+                _columnCount = buildingData.Column;
 
                 _collider.size = new Vector2(_columnCount * size, _rowCount * size);
             }
         }
 
-        // set current building class info from shared level manager
+        // set current buildingData class info from shared level manager
         private void SetCurrentBuilding()
         {
             foreach (var building in SharedLevelManager.Instance.BuildingElements)
             {
                 if (building.Name == _currentBuildingName)
                 {
-                    _currentBuilding = building;
-                    _currentHealth = (int) _currentBuilding.Health;
-                    _currentBuildingType.Healthbar.fillAmount = (float) _currentHealth / _currentBuilding.Health;
+                    _currentBuildingData = building;
+                    _currentHealth = (int) _currentBuildingData.Health;
+                    _currentBuildingType.Healthbar.fillAmount = (float) _currentHealth / _currentBuildingData.Health;
                     break;
                 }
             }
         }
 
-        // take damage from other soldier
+        // take damage from other soldierData
         public void TakeDamage(int damage)
         {
             _currentHealth = _currentHealth - damage > 0 ? _currentHealth - damage : 0;
-            _currentBuildingType.Healthbar.fillAmount = (float) _currentHealth / _currentBuilding.Health;
+            _currentBuildingType.Healthbar.fillAmount = (float) _currentHealth / _currentBuildingData.Health;
             if (_currentHealth == 0)
             {
                 gameObject.SetActive(false);

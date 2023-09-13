@@ -7,7 +7,7 @@ namespace PanteonDemo.Controller
 {
     public static class PlacementController
     {
-        public static void Place(IPlaceble client)
+        public static void Place(IPlaceable client)
         {
             client.Place();
         }

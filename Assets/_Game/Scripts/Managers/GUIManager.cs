@@ -3,7 +3,7 @@ using UnityEngine;
 namespace PanteonDemo
 {
     /// <summary>
-    /// Event is triggered when building is spawned and placement is completed 
+    /// Event is triggered when buildingData is spawned and placement is completed 
     /// </summary>
     public struct BuildingPlaceEvent
     {
@@ -29,14 +29,14 @@ namespace PanteonDemo
             _placementArea.SetActive(false);
         }
 
-        public void SetInformationArea(Soldier soldier)
+        public void SetInformationArea(SoldierData soldierData)
         {
-            _informationArea.OpenInfo(soldier);
+            _informationArea.OpenInfo(soldierData);
         }
 
-        public void SetInformationArea(Building building, BuildingController selectedBuilding)
+        public void SetInformationArea(BuildingData buildingData, BuildingController selectedBuilding)
         {
-            _informationArea.OpenInfo(building, selectedBuilding);
+            _informationArea.OpenInfo(buildingData, selectedBuilding);
         }
 
         public void OnClickPlacementDeclineButton()

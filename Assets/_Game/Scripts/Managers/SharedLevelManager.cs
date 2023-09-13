@@ -11,19 +11,19 @@ namespace PanteonDemo
         [SerializeField] private ObjectPool _buildingPool;
 
         [Header("Unit Lists")] [SerializeField]
-        private List<Soldier> _soldierUnits = new List<Soldier>();
+        private List<SoldierData> _soldierUnits = new List<SoldierData>();
 
-        [SerializeField] private List<Building> _buildingElements = new List<Building>();
+        [SerializeField] private List<BuildingData> _buildingElements = new List<BuildingData>();
 
         private List<SoldierController> _spawnedSoldiers = new List<SoldierController>();
         private List<BuildingController> _spawnedBuildings = new List<BuildingController>();
 
-        public List<Soldier> SoldierUnits => _soldierUnits;
-        public List<Building> BuildingElements => _buildingElements;
+        public List<SoldierData> SoldierUnits => _soldierUnits;
+        public List<BuildingData> BuildingElements => _buildingElements;
 
-        public Building GetBuilding(string name)
+        public BuildingData GetBuilding(string name)
         {
-            foreach (Building building in SharedLevelManager.Instance.BuildingElements)
+            foreach (BuildingData building in SharedLevelManager.Instance.BuildingElements)
             {
                 if (building.Name == name)
                 {
@@ -34,9 +34,9 @@ namespace PanteonDemo
             return null;
         }
 
-        public Soldier GetSoldier(string name)
+        public SoldierData GetSoldier(string name)
         {
-            foreach (Soldier soldier in SoldierUnits)
+            foreach (SoldierData soldier in SoldierUnits)
             {
                 if (soldier.Name == name)
                 {

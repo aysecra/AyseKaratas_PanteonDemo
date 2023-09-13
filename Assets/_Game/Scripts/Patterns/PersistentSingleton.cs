@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace PanteonDemo
 {
-    public class PersistentSingleton<T> : MonoBehaviour where T : Component
+    public class PersistentSingleton<T> : MonoBehaviour where T : UnityEngine.Component
     {
         private static T _instance;
         

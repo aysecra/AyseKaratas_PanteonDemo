@@ -15,18 +15,18 @@ namespace PanteonDemo
         [SerializeField] private TMPro.TextMeshProUGUI _textDamage;
         [SerializeField] private Button _button;
 
-        private Soldier _currentSoldierData;
+        private SoldierData _currentSoldierDataData;
         private bool _isActive = true;
         private BuildingController _selectedBuilding;
 
-        public void SetElementValue(Soldier soldierData, BuildingController selectedBuilding)
+        public void SetElementValue(SoldierData soldierDataData, BuildingController selectedBuilding)
         {
             _selectedBuilding = selectedBuilding;
-            _currentSoldierData = soldierData;
-            _imgElement.sprite = soldierData.Image;
-            _textTitle.text = soldierData.Name;
-            _textHealth.text = soldierData.Health.ToString();
-            _textDamage.text = soldierData.Damage.ToString();
+            _currentSoldierDataData = soldierDataData;
+            _imgElement.sprite = soldierDataData.Image;
+            _textTitle.text = soldierDataData.Name;
+            _textHealth.text = soldierDataData.Health.ToString();
+            _textDamage.text = soldierDataData.Damage.ToString();
         }
 
         public void OnButtonClicked()
@@ -41,7 +41,7 @@ namespace PanteonDemo
 
                 GridsCell cell = GridSystem.Instance.GetEmptyACell((int) beginingRow, (int) _selectedBuilding.PlacedCellList[0].Column);
                 SoldierController soldier =
-                    SharedLevelManager.Instance.SpawnElement<SoldierController>(_currentSoldierData.Name,
+                    SharedLevelManager.Instance.SpawnElement<SoldierController>(_currentSoldierDataData.Name,
                         cell.transform.position);
                 cell.CellBase.IsWalkable = false;
                 soldier.PlacedCell = cell;

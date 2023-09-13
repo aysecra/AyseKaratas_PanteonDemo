@@ -38,18 +38,18 @@ namespace PanteonDemo
         {
             for (int i = 0; i < amountToPool; i++)
             {
-                Building building = SharedLevelManager.Instance.BuildingElements[i];
-                AddButton(building);
+                BuildingData buildingData = SharedLevelManager.Instance.BuildingElements[i];
+                AddButton(buildingData);
             }
         }
 
-        // open a building spawn button
-        private void AddButton(Building building)
+        // open a buildingData spawn button
+        private void AddButton(BuildingData buildingData)
         {
             BuildingButton newBuildingButton = (BuildingButton) GetPooledObject();
             newBuildingButton.gameObject.SetActive(true);
             _scrollerElements.Add(newBuildingButton);
-            newBuildingButton.SetElementValue(building);
+            newBuildingButton.SetElementValue(buildingData);
         }
     }
 }

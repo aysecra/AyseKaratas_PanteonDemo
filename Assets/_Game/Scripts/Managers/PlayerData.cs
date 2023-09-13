@@ -12,7 +12,7 @@ public class PlayerData
 }
 
 [Serializable]
-public class Soldier
+public class SoldierData
 {
     public string Name;
     public Sprite Image;
@@ -38,7 +38,7 @@ public class SoldierName
 }
 
 [Serializable]
-public class Building
+public class BuildingData
 {
     public string Name;
     public uint Column;

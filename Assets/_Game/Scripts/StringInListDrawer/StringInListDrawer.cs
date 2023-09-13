@@ -84,7 +84,7 @@ public static class PropertyDrawersHelper
     public static string[] AllSoldierNames()
     {
         var temp = new List<string>();
-        foreach (Soldier soldier in SharedLevelManager.Instance.SoldierUnits)
+        foreach (SoldierData soldier in SharedLevelManager.Instance.SoldierUnits)
         {
             temp.Add(soldier.Name);
         }
@@ -95,7 +95,7 @@ public static class PropertyDrawersHelper
     public static string[] AllBuildingNames()
     {
         var temp = new List<string>();
-        foreach (Building building in SharedLevelManager.Instance.BuildingElements)
+        foreach (BuildingData building in SharedLevelManager.Instance.BuildingElements)
         {
             temp.Add(building.Name);
         }

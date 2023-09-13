@@ -18,10 +18,10 @@ namespace PanteonDemo
 
         [SerializeField] private float _durationPerCell = .25f;
 
-        private Soldier _currentSoldier;
+        private SoldierData _currentSoldierData;
 
         public GridsCell PlacedCell { get; set; }
-        public Soldier CurrentSoldier => _currentSoldier;
+        public SoldierData CurrentSoldierData => _currentSoldierData;
         private int _currentHealth;
 
         private void Start()
@@ -60,16 +60,16 @@ namespace PanteonDemo
             }
         }
 
-        // set soldier type
+        // set soldierData type
         private void SetCurrentSoldier()
         {
             foreach (var soldier in SharedLevelManager.Instance.SoldierUnits)
             {
                 if (soldier.Name == _currentSoldierName)
                 {
-                    _currentSoldier = soldier;
-                    _currentHealth = (int) _currentSoldier.Health;
-                    _healthbar.fillAmount = (float) _currentHealth / _currentSoldier.Health;
+                    _currentSoldierData = soldier;
+                    _currentHealth = (int) _currentSoldierData.Health;
+                    _healthbar.fillAmount = (float) _currentHealth / _currentSoldierData.Health;
                     break;
                 }
             }
@@ -90,7 +90,7 @@ namespace PanteonDemo
                 }));
         }
 
-        // move to building or soldier
+        // move to buildingData or soldierData
         public void Move<T>(Vector3[] path, GridsCell targetCell, T element) where T : class
         {
             transform.DOPath(path, _durationPerCell * path.Length)
@@ -106,24 +106,24 @@ namespace PanteonDemo
                 }));
         }
 
-        // hit to building or soldier
+        // hit to buildingData or soldierData
         private void HitToElement<T>(T element) where T : class
         {
             if (typeof(T) == typeof(SoldierController))
             {
-                (element as SoldierController).TakeDamage((int) _currentSoldier.Damage);
+                (element as SoldierController).TakeDamage((int) _currentSoldierData.Damage);
             }
 
             else if (typeof(T) == typeof(BuildingController))
             {
-                (element as BuildingController).TakeDamage((int) _currentSoldier.Damage);
+                (element as BuildingController).TakeDamage((int) _currentSoldierData.Damage);
             }
         }
 
         public void TakeDamage(int damage)
         {
             _currentHealth = _currentHealth - damage > 0 ? _currentHealth - damage : 0;
-            _healthbar.fillAmount = (float) _currentHealth / _currentSoldier.Health;
+            _healthbar.fillAmount = (float) _currentHealth / _currentSoldierData.Health;
             if(_currentHealth == 0)
             {
                 gameObject.SetActive(false);

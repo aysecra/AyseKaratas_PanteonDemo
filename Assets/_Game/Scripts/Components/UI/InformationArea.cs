@@ -50,7 +50,7 @@ namespace PanteonDemo
             _imgInfo.gameObject.SetActive(true);
         }
 
-        public void OpenInfo(Building infoElement, BuildingController selectedBuilding)
+        public void OpenInfo(BuildingData infoElement, BuildingController selectedBuilding)
         {
             OpenInfoArea();
             _imgInfo.sprite = infoElement.Image;
@@ -59,11 +59,11 @@ namespace PanteonDemo
 
             if (infoElement.Production != null && infoElement.Production.Count > 0)
             {
-                List<Soldier> soldierList = new List<Soldier>();
+                List<SoldierData> soldierList = new List<SoldierData>();
                 foreach (var production in infoElement.Production)
                 {
-                    Soldier soldier = SharedLevelManager.Instance.GetSoldier(production.Name);
-                    if (soldier != null) soldierList.Add(soldier);
+                    SoldierData soldierData = SharedLevelManager.Instance.GetSoldier(production.Name);
+                    if (soldierData != null) soldierList.Add(soldierData);
                 }
 
                 if (soldierList.Count > 0)
@@ -82,7 +82,7 @@ namespace PanteonDemo
             }
         }
 
-        public void OpenInfo(Soldier infoElement)
+        public void OpenInfo(SoldierData infoElement)
         {
             OpenInfoArea();
             _productArea.SetActive(false);
@@ -91,21 +91,21 @@ namespace PanteonDemo
             _txtName.text = infoElement.Name;
         }
 
-        private void AddButtons(List<Soldier> productList, BuildingController selectedBuilding)
+        private void AddButtons(List<SoldierData> productList, BuildingController selectedBuilding)
         {
             for (int i = 0; i < productList.Count; i++)
             {
-                Soldier soldier = productList[i];
-                AddButton(soldier,selectedBuilding);
+                SoldierData soldierData = productList[i];
+                AddButton(soldierData,selectedBuilding);
             }
         }
 
-        private void AddButton(Soldier soldier, BuildingController selectedBuilding)
+        private void AddButton(SoldierData soldierData, BuildingController selectedBuilding)
         {
             SoldierButton newSoldierButton = (SoldierButton) GetPooledObject();
             newSoldierButton.gameObject.SetActive(true);
             _scrollerElements.Add(newSoldierButton);
-            newSoldierButton.SetElementValue(soldier,selectedBuilding);
+            newSoldierButton.SetElementValue(soldierData,selectedBuilding);
         }
 
         private void CloseAllButton()

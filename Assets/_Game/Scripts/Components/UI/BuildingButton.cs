@@ -5,7 +5,7 @@ using UnityEngine.UI;
 namespace PanteonDemo
 {
     /// <summary>
-    /// Event is triggered when building is spawned and placement is not completed 
+    /// Event is triggered when buildingData is spawned and placement is not completed 
     /// </summary>
     public struct BuildingSpawnEvent
     {
@@ -33,21 +33,21 @@ namespace PanteonDemo
         [SerializeField] private TMPro.TextMeshProUGUI _textHealth;
         [SerializeField] private Button _button;
 
-        private Building _currentBuildingData;
+        private BuildingData _currentBuildingDataData;
         private bool _isActive = true;
 
-        public void SetElementValue(Building buildingData)
+        public void SetElementValue(BuildingData buildingDataData)
         {
-            _currentBuildingData = buildingData;
-            _imgElement.sprite = buildingData.Image;
-            _textTitle.text = buildingData.Name;
-            _textHealth.text = buildingData.Health.ToString();
+            _currentBuildingDataData = buildingDataData;
+            _imgElement.sprite = buildingDataData.Image;
+            _textTitle.text = buildingDataData.Name;
+            _textHealth.text = buildingDataData.Health.ToString();
         }
 
         public void OnButtonClicked()
         {
-            uint rowCount = _currentBuildingData.Row;
-            uint columnCount = _currentBuildingData.Column;
+            uint rowCount = _currentBuildingDataData.Row;
+            uint columnCount = _currentBuildingDataData.Column;
 
             List<GridsCell> cellList =
                 GridSystem.Instance.GetEmptyArea(rowCount, columnCount);
@@ -60,7 +60,7 @@ namespace PanteonDemo
                 Vector3 downLeftCorner = cellList[0].transform.position - new Vector3(cellSize, cellSize, 0) * .5f;
                 Vector3 position = downLeftCorner + changingDist;
                 BuildingController building =
-                    SharedLevelManager.Instance.SpawnElement<BuildingController>(_currentBuildingData.Name, position);
+                    SharedLevelManager.Instance.SpawnElement<BuildingController>(_currentBuildingDataData.Name, position);
 
                 building.SetFirstPositionWithDownLeftCell((int) cellList[0].Row, (int) cellList[0].Row);
                 EventManager.TriggerEvent(new BuildingSpawnEvent(building, position, cellList));

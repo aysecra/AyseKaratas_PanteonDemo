@@ -63,12 +63,12 @@ namespace PanteonDemo
 
         private void OnLeftClickSoldier(SoldierController soldierContoller)
         {
-            GUIManager.Instance.SetInformationArea(soldierContoller.CurrentSoldier);
+            GUIManager.Instance.SetInformationArea(soldierContoller.CurrentSoldierData);
         }
 
         private void OnLeftClickBuilding(BuildingController buildingController)
         {
-            GUIManager.Instance.SetInformationArea(buildingController.CurrentBuilding, buildingController);
+            GUIManager.Instance.SetInformationArea(buildingController.CurrentBuildingData, buildingController);
         }
 
         private void OnRightClickCell(GridsCell cell, SoldierController soldierController)
@@ -91,7 +91,7 @@ namespace PanteonDemo
 
         private void OnRightClickBuilding(BuildingController buildingController, SoldierController soldierController)
         {
-            // control empty cell in soldier cells neighbours
+            // control empty cell in soldierData cells neighbours
             GridsCellBase target = null;
 
             foreach (GridsCell placedCell in buildingController.PlacedCellList)
