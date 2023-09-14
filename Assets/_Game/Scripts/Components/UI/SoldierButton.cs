@@ -33,18 +33,18 @@ namespace PanteonDemo
         {
             if(_isActive)
             {
-                uint beginingRow = _selectedBuilding.PlacedCellList[0].Row > 0
-                    ? _selectedBuilding.PlacedCellList[0].Row-1
-                    : _selectedBuilding.PlacedCellList[^1].Row < GridSystem.Instance.RowCount - 1
-                        ? _selectedBuilding.PlacedCellList[^1].Row + 1
-                        :_selectedBuilding.PlacedCellList[0].Row;
+                // uint beginingRow = _selectedBuilding.PlacedCellList[0].Row > 0
+                //     ? _selectedBuilding.PlacedCellList[0].Row-1
+                //     : _selectedBuilding.PlacedCellList[^1].Row < GridGenerator.Instance.RowCount - 1
+                //         ? _selectedBuilding.PlacedCellList[^1].Row + 1
+                //         :_selectedBuilding.PlacedCellList[0].Row;
 
-                GridsCell cell = GridSystem.Instance.GetEmptyACell((int) beginingRow, (int) _selectedBuilding.PlacedCellList[0].Column);
-                SoldierController soldier =
-                    SharedLevelManager.Instance.SpawnElement<SoldierController>(_currentSoldierDataData.Name,
-                        cell.transform.position);
-                cell.CellBase.IsWalkable = false;
-                soldier.PlacedCell = cell;
+                // GridsCell cell = GridGenerator.Instance.GetEmptyACell((int) beginingRow, (int) _selectedBuilding.PlacedCellList[0].Column);
+                // SoldierController soldier =
+                //     SharedLevelManager.Instance.SpawnElement<SoldierController>(_currentSoldierDataData.Name,
+                //         cell.transform.position);
+                // cell.CellBase.IsWalkable = false;
+                // soldier.PlacedCell = cell;
             }
         }
 

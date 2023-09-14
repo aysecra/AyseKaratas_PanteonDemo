@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace PanteonDemo.SO
@@ -11,5 +9,10 @@ namespace PanteonDemo.SO
         public abstract string Info { get; }
         public abstract Vector2 Size { get; }
         public abstract uint Health { get; }
+
+        public virtual bool IsEqual(UnitSO other)
+        {
+            return other == this;
+        }
     }
 }

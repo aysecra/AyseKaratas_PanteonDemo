@@ -1,114 +1,71 @@
 using System;
 using System.Collections.Generic;
+using PanteonDemo;
+using PanteonDemo.Logic;
 using UnityEngine;
 
-namespace PanteonDemo
+public class GridsCell : MonoBehaviour
 {
-    [Serializable]
-    public class GridsCellBase
+    private uint _row;
+    private uint _column;
+
+    private CellInfo _gridsCellBase;
+    private GridGenerator _gridGenerator;
+
+    public uint Column
     {
-        public GridsCell CellObjectScript;
-
-        public GridsCellBase Connection;
-
-        // distance from the cell to the start cell 
-        public float G;
-
-        // distance from the cell to the target cell 
-        public float H;
-        public float F => G + H;
-        public bool IsWalkable = true;
-
-        public List<GridsCellBase> Neighbors;
-
-        public float GetDistance(GridsCellBase neighbor)
-        {
-            return Vector3.Distance(CellObjectScript.transform.position, neighbor.CellObjectScript.transform.position);
-        }
+        get => _column;
+        set => _column = value;
     }
 
-    public class GridsCell : MonoBehaviour
-        , EventListener<GridCellsIndexCalcEvent>
+    public uint Row
     {
-        private uint _row;
-        private uint _column;
+        get => _row;
+        set => _row = value;
+    }
 
-        private GridsCellBase _gridsCellBase;
-        private GridSystem _gridSystem;
+    public CellInfo CellBase => _gridsCellBase;
 
-        public uint Column
+    private void Start()
+    {
+        // _gridGenerator = GridGenerator.Instance;
+    }
+
+    public void GetHexagonNeighbours()
+    {
+        List<CellInfo> neighbours = new List<CellInfo>();
+
+        // get down neighbours
+        if (_row > 0)
         {
-            get => _column;
-            set => _column = value;
+            // neighbours.Add(_gridGenerator.GetCell((int) (_row - 1), (int) _column).CellBase);
         }
 
-        public uint Row
+        // // get up neighbours
+        // if (_row < _gridGenerator.RowCount - 1)
+        // {
+        //     // GridsCell cell = _gridGenerator.GetCell((int) (_row + 1), (int) _column);
+        //     // neighbours.Add(cell.CellBase);
+        // }
+
+        // get left neighbours
+        if (_column > 0)
         {
-            get => _row;
-            set => _row = value;
+            // neighbours.Add(_gridGenerator.GetCell((int) _row, (int) (_column - 1)).CellBase);
         }
 
-        public GridsCellBase CellBase => _gridsCellBase;
+        // get right neighbours
+        // if (_column < _gridGenerator.ColumnCount - 1)
+        // {
+        //     // neighbours.Add(_gridGenerator.GetCell((int) _row, (int) (_column + 1)).CellBase);
+        // }
 
-        private void Start()
-        {
-            _gridSystem = GridSystem.Instance;
-        }
+        _gridsCellBase.Neighbors = neighbours;
+        gameObject.name = $"{gameObject.name}({_row},{_column})";
+    }
 
-        public void GetHexagonNeighbours()
-        {
-            List<GridsCellBase> neighbours = new List<GridsCellBase>();
-
-            // get down neighbours
-            if (_row > 0)
-            {
-                neighbours.Add(_gridSystem.GetCell((int) (_row - 1), (int) _column).CellBase);
-            }
-
-            // get up neighbours
-            if (_row < _gridSystem.RowCount - 1)
-            {
-                GridsCell cell = _gridSystem.GetCell((int) (_row + 1), (int) _column);
-                neighbours.Add(cell.CellBase);
-            }
-
-            // get left neighbours
-            if (_column > 0)
-            {
-                neighbours.Add(_gridSystem.GetCell((int) _row, (int) (_column - 1)).CellBase);
-            }
-
-            // get right neighbours
-            if (_column < _gridSystem.ColumnCount - 1)
-            {
-                neighbours.Add(_gridSystem.GetCell((int) _row, (int) (_column + 1)).CellBase);
-            }
-
-            _gridsCellBase.Neighbors = neighbours;
-            gameObject.name = $"{gameObject.name}({_row},{_column})";
-        }
-
-        public void SetCellBase()
-        {
-            _gridsCellBase = new GridsCellBase() {CellObjectScript = this};
-        }
-
-        private void OnEnable()
-        {
-            this.EventStartListening<GridCellsIndexCalcEvent>();
-        }
-
-        private void OnDisable()
-        {
-            this.EventStopListening<GridCellsIndexCalcEvent>();
-        }
-
-        public void OnEventTrigger(GridCellsIndexCalcEvent currentEvent)
-        {
-            if (_gridSystem == null)
-                _gridSystem = GridSystem.Instance;
-
-            GetHexagonNeighbours();
-        }
+    public void SetCellBase()
+    {
+        // _gridsCellBase = new GridsCellBase() {CellObjectScript = this};
     }
 }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using PanteonDemo.Logic;
 using UnityEngine;
 
 namespace PanteonDemo
@@ -73,7 +74,7 @@ namespace PanteonDemo
 
         private void OnRightClickCell(GridsCell cell, SoldierController soldierController)
         {
-            List<GridsCellBase> pathCellList =
+            List<CellInfo> pathCellList =
                 Pathfinding.FindPath(soldierController.PlacedCell.CellBase, cell.CellBase);
 
             if (pathCellList != null && pathCellList.Count > 0)
@@ -82,7 +83,7 @@ namespace PanteonDemo
 
                 for (int i = 0; i < pathCellList.Count; i++)
                 {
-                    path[i] = pathCellList[i].CellObjectScript.transform.position;
+                    // path[i] = pathCellList[i].CellObjectScript.transform.position;
                 }
 
                 soldierController.Move(path, cell);
@@ -92,7 +93,7 @@ namespace PanteonDemo
         private void OnRightClickBuilding(BuildingController buildingController, SoldierController soldierController)
         {
             // control empty cell in soldierData cells neighbours
-            GridsCellBase target = null;
+            CellInfo target = null;
 
             foreach (GridsCell placedCell in buildingController.PlacedCellList)
             {
@@ -111,7 +112,7 @@ namespace PanteonDemo
 
             if (target != null)
             {
-                List<GridsCellBase> pathCellList =
+                List<CellInfo> pathCellList =
                     Pathfinding.FindPath(soldierController.PlacedCell.CellBase, target);
 
                 if (pathCellList != null && pathCellList.Count > 0)
@@ -120,17 +121,17 @@ namespace PanteonDemo
 
                     for (int i = 0; i < pathCellList.Count; i++)
                     {
-                        path[i] = pathCellList[i].CellObjectScript.transform.position;
+                        // path[i] = pathCellList[i].CellObjectScript.transform.position;
                     }
 
-                    soldierController.Move(path, pathCellList[^1].CellObjectScript, buildingController);
+                    // soldierController.Move(path, pathCellList[^1].CellObjectScript, buildingController);
                 }
             }
         }
 
         private void OnRightClickSoldier(SoldierController soldier, SoldierController soldierController)
         {
-            GridsCellBase target = null;
+            CellInfo target = null;
 
             foreach (var neighbour in soldier.PlacedCell.CellBase.Neighbors)
             {
@@ -143,7 +144,7 @@ namespace PanteonDemo
 
             if (target != null)
             {
-                List<GridsCellBase> pathCellList =
+                List<CellInfo> pathCellList =
                     Pathfinding.FindPath(soldierController.PlacedCell.CellBase, target);
 
                 if (pathCellList != null && pathCellList.Count > 0)
@@ -152,10 +153,10 @@ namespace PanteonDemo
 
                     for (int i = 0; i < pathCellList.Count; i++)
                     {
-                        path[i] = pathCellList[i].CellObjectScript.transform.position;
+                        // path[i] = pathCellList[i].CellObjectScript.transform.position;
                     }
 
-                    soldierController.Move(path, pathCellList[^1].CellObjectScript, soldier);
+                    // soldierController.Move(path, pathCellList[^1].CellObjectScript, soldier);
                 }
             }
         }

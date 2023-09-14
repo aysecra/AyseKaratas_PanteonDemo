@@ -61,13 +61,13 @@ namespace PanteonDemo
             _columnCount = columnCount;
             _rowCount = rowCount;
 
-            int gridColumn = (int) GridSystem.Instance.ColumnCount;
-            int gridRow = (int) GridSystem.Instance.RowCount;
+            // int gridColumn = (int) GridGenerator.Instance.ColumnCount;
+            // int gridRow = (int) GridGenerator.Instance.RowCount;
 
-            DownLeft = new ObjectCellInfo(gridColumn, gridRow);
-            DownRight = new ObjectCellInfo(gridColumn, gridRow);
-            TopLeft = new ObjectCellInfo(gridColumn, gridRow);
-            TopRight = new ObjectCellInfo(gridColumn, gridRow);
+            // DownLeft = new ObjectCellInfo(gridColumn, gridRow);
+            // DownRight = new ObjectCellInfo(gridColumn, gridRow);
+            // TopLeft = new ObjectCellInfo(gridColumn, gridRow);
+            // TopRight = new ObjectCellInfo(gridColumn, gridRow);
         }
 
         // place buildingData from use down left cell info
@@ -92,8 +92,8 @@ namespace PanteonDemo
 
             // Control area is can place / clear
 
-            if (GridSystem.Instance.IsClearArea(targetRowDL, targetRowDL + _rowCount - 1, targetColumnDL,
-                    targetColumnDL + _columnCount - 1, out List<GridsCell> cellList)) CellList = cellList;
+            // if (GridGenerator.Instance.IsClearArea(targetRowDL, targetRowDL + _rowCount - 1, targetColumnDL,
+                    // targetColumnDL + _columnCount - 1, out List<GridsCell> cellList)) CellList = cellList;
 
             else return false;
 
@@ -103,10 +103,10 @@ namespace PanteonDemo
 
         public bool PlacementFromDownLeftCell(int row, int column)
         {
-            if (GridSystem.Instance.IsClearArea(row, row + _rowCount - 1, column,
-                    column + _columnCount - 1, out List<GridsCell> cellList)) CellList = cellList;
+            // if (GridGenerator.Instance.IsClearArea(row, row + _rowCount - 1, column,
+                    // column + _columnCount - 1, out List<GridsCell> cellList)) CellList = cellList;
 
-            else return false;
+            // else return false;
 
             PlaceFromDownLeftCell(row, column);
             return true;
@@ -165,12 +165,12 @@ namespace PanteonDemo
 
         public void SetPositionWithDownLeftCell(int rowChangeAmount, int columnChangeAmount, Vector3 cellPos)
         {
-            float cellSize = GridSystem.Instance.CellSize.x;
-            Vector3 changingDist =
-                new Vector3(cellSize * (int) _columnCount * .5f, cellSize * (int) _rowCount * .5f, 0);
-            Vector3 downLeftCorner = cellPos - new Vector3(cellSize, cellSize, 0) * .5f;
-            Vector3 position = downLeftCorner + changingDist;
-            transform.position = position;
+            // float cellSize = GridGenerator.Instance.CellSize.x;
+            // Vector3 changingDist =
+            //     new Vector3(cellSize * (int) _columnCount * .5f, cellSize * (int) _rowCount * .5f, 0);
+            // Vector3 downLeftCorner = cellPos - new Vector3(cellSize, cellSize, 0) * .5f;
+            // Vector3 position = downLeftCorner + changingDist;
+            // transform.position = position;
 
             if (Raycast2DManager.SendRaycast(_currentBuildingType.RaycastPoint.position + Vector3.back * .5f,
                     Vector3.forward, out GridsCell cell))
@@ -200,10 +200,10 @@ namespace PanteonDemo
             {
                 PlacedCellList = _multipleCellPlacement.CellList;
 
-                GridSystem.Instance.PlaceMultipleCellArea(_multipleCellPlacement.DownLeft.Row,
-                    _multipleCellPlacement.DownLeft.Row + (int) _rowCount - 1,
-                    _multipleCellPlacement.DownLeft.Column,
-                    _multipleCellPlacement.DownLeft.Column + (int) _columnCount - 1);
+                // GridGenerator.Instance.PlaceMultipleCellArea(_multipleCellPlacement.DownLeft.Row,
+                    // _multipleCellPlacement.DownLeft.Row + (int) _rowCount - 1,
+                    // _multipleCellPlacement.DownLeft.Column,
+                    // _multipleCellPlacement.DownLeft.Column + (int) _columnCount - 1);
 
                 _currentBuildingType.ConfirmPlacementArea.SetActive(false);
                 return true;
@@ -235,11 +235,11 @@ namespace PanteonDemo
 
             if (buildingData != null)
             {
-                float size = GridSystem.Instance.CellSize.x;
+                // float size = GridGenerator.Instance.CellSize.x;
                 _rowCount = buildingData.Row;
                 _columnCount = buildingData.Column;
 
-                _collider.size = new Vector2(_columnCount * size, _rowCount * size);
+                // _collider.size = new Vector2(_columnCount * size, _rowCount * size);
             }
         }
 

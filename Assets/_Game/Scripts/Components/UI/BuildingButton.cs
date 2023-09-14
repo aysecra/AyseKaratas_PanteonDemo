@@ -49,22 +49,22 @@ namespace PanteonDemo
             uint rowCount = _currentBuildingDataData.Row;
             uint columnCount = _currentBuildingDataData.Column;
 
-            List<GridsCell> cellList =
-                GridSystem.Instance.GetEmptyArea(rowCount, columnCount);
+            // List<GridsCell> cellList =
+                // GridGenerator.Instance.GetEmptyArea(rowCount, columnCount);
 
-            if (_isActive && cellList != null && cellList.Count > 0)
-            {
-                float cellSize = GridSystem.Instance.CellSize.x;
-                Vector3 changingDist =
-                    new Vector3(cellSize * (int) columnCount * .5f, cellSize * (int) rowCount * .5f, 0);
-                Vector3 downLeftCorner = cellList[0].transform.position - new Vector3(cellSize, cellSize, 0) * .5f;
-                Vector3 position = downLeftCorner + changingDist;
-                BuildingController building =
-                    SharedLevelManager.Instance.SpawnElement<BuildingController>(_currentBuildingDataData.Name, position);
-
-                building.SetFirstPositionWithDownLeftCell((int) cellList[0].Row, (int) cellList[0].Row);
-                EventManager.TriggerEvent(new BuildingSpawnEvent(building, position, cellList));
-            }
+            // if (_isActive && cellList != null && cellList.Count > 0)
+            // {
+            //     float cellSize = GridGenerator.Instance.CellSize.x;
+            //     Vector3 changingDist =
+            //         new Vector3(cellSize * (int) columnCount * .5f, cellSize * (int) rowCount * .5f, 0);
+            //     Vector3 downLeftCorner = cellList[0].transform.position - new Vector3(cellSize, cellSize, 0) * .5f;
+            //     Vector3 position = downLeftCorner + changingDist;
+            //     BuildingController building =
+            //         SharedLevelManager.Instance.SpawnElement<BuildingController>(_currentBuildingDataData.Name, position);
+            //
+            //     building.SetFirstPositionWithDownLeftCell((int) cellList[0].Row, (int) cellList[0].Row);
+            //     EventManager.TriggerEvent(new BuildingSpawnEvent(building, position, cellList));
+            // }
         }
 
         protected override void OnEnable()

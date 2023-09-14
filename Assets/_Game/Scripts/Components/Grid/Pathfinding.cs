@@ -1,20 +1,21 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using PanteonDemo.Logic;
 using UnityEngine;
 
 namespace PanteonDemo
 {
     public static class Pathfinding
     {
-        public static List<GridsCellBase> FindPath(GridsCellBase startCell, GridsCellBase targetCell)
+        public static List<CellInfo> FindPath(CellInfo startCell, CellInfo targetCell)
         {
-            List<GridsCellBase> toSearch = new List<GridsCellBase>(){startCell};
-            List<GridsCellBase> processed = new List<GridsCellBase>();
+            List<CellInfo> toSearch = new List<CellInfo>(){startCell};
+            List<CellInfo> processed = new List<CellInfo>();
 
             while (toSearch.Any())
             {
-                GridsCellBase currentCell = toSearch[0];
+                CellInfo currentCell = toSearch[0];
                 foreach (var searchCell in toSearch)
                 {
                     if (searchCell.F <= currentCell.F && searchCell.H < currentCell.H)
@@ -28,8 +29,8 @@ namespace PanteonDemo
 
                 if (currentCell == targetCell)
                 {
-                    GridsCellBase currentPathTile = targetCell;
-                    List<GridsCellBase> path = new List<GridsCellBase>();
+                    CellInfo currentPathTile = targetCell;
+                    List<CellInfo> path = new List<CellInfo>();
 
                     while (currentPathTile != startCell)
                     {
@@ -41,7 +42,7 @@ namespace PanteonDemo
                     return path;
                 }
 
-                IEnumerable<GridsCellBase> walkableNeighbors =
+                IEnumerable<CellInfo> walkableNeighbors =
                     currentCell.Neighbors.Where(cell => cell.IsWalkable && !processed.Contains((cell)));
 
                 foreach (var neighbor in walkableNeighbors)
