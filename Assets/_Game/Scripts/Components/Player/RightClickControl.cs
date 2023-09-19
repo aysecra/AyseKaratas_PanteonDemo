@@ -83,8 +83,7 @@ namespace PanteonDemo.Component
                 else if (damageableObject.TryGetComponent(out IPlaceable placeable))
                 {
                     // control is damagable object neighbour
-                    CellInfo cell = gridGenerator.GetCellInfoToWorldPosition(origin);
-                    foreach (var neighbor in cell.Neighbors)
+                    foreach (var neighbor in startCell.Neighbors)
                     {
                         foreach (var damagableCell in placeable.PlaceableCellList)
                         {
