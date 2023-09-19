@@ -2,9 +2,12 @@ using System;
 using System.Collections.Generic;
 using PanteonDemo.Logic;
 using PanteonDemo.SO;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+
+#if UNITY_EDITOR
+using UnityEditor.SceneManagement;
+#endif
 
 namespace PanteonDemo.Component
 {
@@ -27,7 +30,7 @@ namespace PanteonDemo.Component
 
         public abstract void CalculateObjectCenter(Vector3 position, Vector2Int size, out Vector3 centerPos,
             out List<CellInfo> cellList);
-        
+
         public abstract bool CalculateObjectFromUpRightCenter(Vector3 position, Vector2Int size, out Vector3 centerPos,
             out List<CellInfo> cellList);
 
@@ -63,7 +66,7 @@ namespace PanteonDemo.Component
             Vector3Int cellPos = grid.WorldToCell(position);
             return grid.CellToWorld(cellPos);
         }
-        
+
         public void GenerateCell()
         {
             GetData();
@@ -81,8 +84,10 @@ namespace PanteonDemo.Component
                 SetCell();
             }
 
+            #if UNITY_EDITOR
             if (!Application.isPlaying)
                 EditorSceneManager.SaveScene(SceneManager.GetActiveScene());
+            #endif
         }
 
         public void ClearCell()
@@ -105,11 +110,11 @@ namespace PanteonDemo.Component
         {
             return _cellArray[index.x, index.y];
         }
-        
+
         public CellInfo GetCellInfoToWorldPosition(Vector3 position)
         {
             Vector3 pos = GetWorldToCellsCenterPosition(position);
-            
+
             foreach (CellInfo cell in _cellArray)
             {
                 if (pos == cell.CenterPosition)
@@ -120,6 +125,5 @@ namespace PanteonDemo.Component
 
             return null;
         }
-
     }
 }

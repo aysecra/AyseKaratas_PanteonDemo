@@ -1,3 +1,4 @@
+using System.Collections;
 using PanteonDemo.Component;
 using PanteonDemo.Event;
 using PanteonDemo.Interfaces;
@@ -10,19 +11,20 @@ namespace PanteonDemo
         , EventListener<SpawnEvent>
         , EventListener<PlacementEvent>
     {
-        [SerializeField] private InformationArea _informationArea;
-        [SerializeField] private ProductionMenu _productionMenu;
-        [SerializeField] private GameObject _placementArea;
+        [SerializeField] private InformationArea informationArea;
+        [SerializeField] private ProductionMenu productionMenu;
+        [SerializeField] private GameObject placementArea;
+        [SerializeField] private GameObject notPlaceableText;
 
         private void Start()
         {
-            _informationArea.ClearInfoArea();
-            _placementArea.SetActive(false);
+            informationArea.ClearInfoArea();
+            placementArea.SetActive(false);
         }
 
         public void SetInformationArea(UnitSO unitSo, IPlaceable placeable = null)
         {
-            _informationArea.OpenInfo(unitSo, placeable);
+            informationArea.OpenInfo(unitSo, placeable);
         }
 
         public void OnClickPlacementDeclineButton()
@@ -37,6 +39,15 @@ namespace PanteonDemo
 
         public void ObjectNotSpawnable()
         {
+            StartCoroutine(IObjectNotSpawnable());
+        }
+
+        IEnumerator IObjectNotSpawnable()
+        {
+            notPlaceableText.gameObject.SetActive(true);
+            EventManager.TriggerEvent(new PlacementEvent(false));
+            yield return new WaitForSeconds(.75f);
+            notPlaceableText.gameObject.SetActive(false);
         }
 
         private void OnEnable()
@@ -54,14 +65,14 @@ namespace PanteonDemo
         public void OnEventTrigger(SpawnEvent currentEvent)
         {
             if (currentEvent.Unit.GetType() == typeof(BuildingUnitSO))
-                _placementArea.SetActive(true);
-            _productionMenu.AllButtonActivation(false);
+                placementArea.SetActive(true);
+            productionMenu.AllButtonActivation(false);
         }
 
         public void OnEventTrigger(PlacementEvent currentEvent)
         {
-            _placementArea.SetActive(false);
-            _productionMenu.AllButtonActivation(true);
+            placementArea.SetActive(false);
+            productionMenu.AllButtonActivation(true);
         }
     }
 }

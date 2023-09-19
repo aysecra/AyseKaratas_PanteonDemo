@@ -39,7 +39,10 @@ namespace PanteonDemo.SO
         public void ClearCell()
         {
             _cellArray = null;
+            
+            #if UNITY_EDITOR
             UnityEditor.EditorUtility.SetDirty(this);
+            #endif
         }
 
         public void SetCellArray(CellInfo[,] array)
@@ -47,13 +50,18 @@ namespace PanteonDemo.SO
             _cellArray = new CellInfo[array.GetLength(0), array.GetLength(1)];
             Array.Copy(array, _cellArray, array.Length);
 
+            #if UNITY_EDITOR
             UnityEditor.EditorUtility.SetDirty(this);
+            #endif
         }
 
         public void SetGridDownLeftPosition(Vector3 position)
         {
             _gridDownLeftPosition = position;
+            
+            #if UNITY_EDITOR
             UnityEditor.EditorUtility.SetDirty(this);
+            #endif
         }
         
     }

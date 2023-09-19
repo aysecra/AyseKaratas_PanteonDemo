@@ -36,7 +36,7 @@ namespace PanteonDemo.Component
 
         public void ManagedUpdate()
         {
-            if(IsClickable)
+            if (IsClickable)
             {
                 if (_spawnedDragableObject != null && _isTouch)
                     DraggingObjectLogic.DetectAndDragObject(_mainCamera, _spawnedDragableObject);
@@ -80,7 +80,8 @@ namespace PanteonDemo.Component
             if (isPlaced)
                 PlacementController.Place((IPlaceable) _spawnedDragableObject,
                     _spawnedDragableObject.PlaceableCellList);
-            _spawnedDragableObject.Object.SetActive(isPlaced);
+            if (_spawnedDragableObject != null)
+                _spawnedDragableObject.Object.SetActive(isPlaced);
             _spawnedDragableObject = null;
         }
     }

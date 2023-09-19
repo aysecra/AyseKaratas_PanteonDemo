@@ -1,8 +1,10 @@
-using PanteonDemo.Logic;
 using PanteonDemo.SO;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+
+#if UNITY_EDITOR
+using UnityEditor.SceneManagement;
+#endif
 
 namespace PanteonDemo.Component
 {
@@ -23,8 +25,10 @@ namespace PanteonDemo.Component
             upRight = new Vector3(downLeft.x + size.x, downLeft.y + size.y, transform.position.z);
             transform.position = CalculateCenterOfCollider(downLeft, size);
 
+            #if UNITY_EDITOR
             if (!Application.isPlaying)
                 EditorSceneManager.SaveScene(SceneManager.GetActiveScene());
+            #endif
         }
 
         private Vector2 CalculateColliderSize()
