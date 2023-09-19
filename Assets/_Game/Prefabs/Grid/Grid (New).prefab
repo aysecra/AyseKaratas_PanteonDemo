@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3835157162650442398}
   - component: {fileID: 3835157162650442399}
-  - component: {fileID: 3835157162650442369}
+  - component: {fileID: 4538436468224235170}
+  - component: {fileID: 1085904582590101072}
   m_Layer: 0
   m_Name: Grid (New)
   m_TagString: Untagged
@@ -48,7 +49,7 @@ Grid:
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 0
   m_CellSwizzle: 0
---- !u!114 &3835157162650442369
+--- !u!114 &4538436468224235170
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -57,13 +58,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 3835157162650442396}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e00cc8b364401493195e26ee934ad42c, type: 3}
+  m_Script: {fileID: 11500000, guid: 78aefcee0ffcf4c30b7c40e389736880, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   gridSO: {fileID: 11400000, guid: f7c28535ccb144f1f905ae8bc5764c95, type: 2}
   grid: {fileID: 3835157162650442399}
   cellParent: {fileID: 4644145592172200288}
-  cellBeginingPoint: {fileID: 4644145591427310428}
+  cellDownLeftPoint: {fileID: 4644145591427310428}
+  gridCollider: {fileID: 4908921876990852913}
+--- !u!114 &1085904582590101072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3835157162650442396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd88320e6c5ba4a50ad02247473ad970, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _spawnArea: {fileID: 4538436468224235170}
 --- !u!1 &4644145591427310429
 GameObject:
   m_ObjectHideFlags: 0
@@ -74,7 +89,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4644145591427310428}
   m_Layer: 0
-  m_Name: BeginingPoint
+  m_Name: DownLeftPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -105,6 +120,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4644145591969819701}
   - component: {fileID: 4644145591969819700}
+  - component: {fileID: 4908921876990852913}
   m_Layer: 0
   m_Name: ColliderContainer
   m_TagString: Untagged
@@ -153,6 +169,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &4908921876990852913
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4644145591969819698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7294cdca04c0b4269b2ef4d0c5bdaea2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gridSO: {fileID: 11400000, guid: f7c28535ccb144f1f905ae8bc5764c95, type: 2}
+  gridGenerator: {fileID: 4538436468224235170}
 --- !u!1 &4644145592172200289
 GameObject:
   m_ObjectHideFlags: 0

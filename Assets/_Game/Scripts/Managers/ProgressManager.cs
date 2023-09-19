@@ -1,15 +1,11 @@
 using System.Collections.Generic;
+using PanteonDemo.Enum;
+using PanteonDemo.Event;
+using PanteonDemo.Serializable;
 using UnityEngine;
 
-namespace PanteonDemo
+namespace PanteonDemo.Manager
 {
-    [System.Serializable]
-    public class LevelProgress
-    {
-        [StringInList(typeof(PropertyDrawersHelper), "AllSceneNames")]
-        public string LevelName;
-    }
-
     public class ProgressManager : PersistentSingleton<ProgressManager>
         , EventListener<LevelEvent>
     {

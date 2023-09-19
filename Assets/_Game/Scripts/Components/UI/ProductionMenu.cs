@@ -1,55 +1,181 @@
+using System.Collections;
 using System.Collections.Generic;
+using PanteonDemo.SO;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace PanteonDemo
+namespace PanteonDemo.Component
 {
-    public class ProductionMenu : ObjectPool
+    public class ProductionMenu : InfiniteScroller
     {
-        [Header("Core Elements")] [SerializeField]
-        private Scrollbar _scrollbar;
-        
+        [SerializeField] private UnitySO unitySo;
+        [SerializeField] private GridLayoutGroup gridLayoutGroup;
+        [SerializeField] private ContentSizeFitter contentSizeFitter;
+        [SerializeField] private int maxNotScrollingAmount = 20;
+
         private int _characterCount;
-        private List<BuildingButton> _scrollerElements = new List<BuildingButton>();
+        private List<UnitButton> _scrollerElements = new List<UnitButton>();
         private bool _isBeginScrollbar;
-        
+        private int lastUnitIndex;
+        private int firstUnitIndex;
+
         protected override void Start()
         {
-            // get amount to pool from shared level manager
-            amountToPool = (uint) SharedLevelManager.Instance.BuildingElements.Count;
             // set pool
             base.Start();
             // open buttons from pool
             AddButtons();
         }
-        
-        private void Update()
-        {
-            // set scroller to begining point
-            if (!_isBeginScrollbar && _scrollbar.value != 1)
-            {
-                _scrollbar.value = 1;
-                _isBeginScrollbar = true;
-            }
-        }
 
         // open multiple button
         private void AddButtons()
         {
-            for (int i = 0; i < amountToPool; i++)
+            List<UnitSO> unitList = unitySo.UnitList;
+            int maxCount = AmountToPool > unitList.Count ? unitList.Count : (int) AmountToPool;
+            if (unitList.Count < maxNotScrollingAmount) scrollRect.enabled = false;
+
+            for (int i = 0; i < maxCount; i++)
             {
-                BuildingData buildingData = SharedLevelManager.Instance.BuildingElements[i];
-                AddButton(buildingData);
+                BuildingUnitSO buildingSO = (BuildingUnitSO) unitList[i];
+                AddButton(buildingSO);
+            }
+
+            firstUnitIndex = maxCount - 1;
+            lastUnitIndex = 0;
+
+            _childCount = maxCount;
+            StartCoroutine(CloseComponents());
+        }
+        
+        protected override void OnValueChanged(Vector2 other)
+        {
+            if (!_isStart)
+            {
+                _isStart = true;
+                _lastPos = other;
+            }
+
+            Vector2 pos = other;
+            _isPositiveDirection = _lastPos.y > pos.y;
+            _lastPos = pos;
+
+            int currentItemIndex = _isPositiveDirection ? _childCount - 1 : 0;
+            var currentItem = scrollRect.content.GetChild(currentItemIndex);
+
+            if (!IsReachedThreshold(currentItem))
+            {
+                return;
+            }
+            
+            
+            int endItemIndex = _isPositiveDirection ? 0 : _childCount - 1;
+            Transform endItem = scrollRect.content.GetChild(endItemIndex);
+            Vector2 newPosition = endItem.position;
+
+            if (_isPositiveDirection)
+            {
+                newPosition.y = endItem.position.y - elementSize.y * 1.5f - elementSpace;
+            }
+            else
+            {
+                newPosition.y = endItem.position.y + elementSize.y * 1.5f + elementSpace;
+            }
+
+            currentItem.position = newPosition;
+            currentItem.SetSiblingIndex(endItemIndex);
+            
+            if (currentItem.TryGetComponent(out BuildingButton buildingButton))
+            {
+                List<UnitSO> unitList = unitySo.UnitList;
+            
+                if (_isPositiveDirection)
+                {
+                    buildingButton.SetElementValue((BuildingUnitSO) unitList[lastUnitIndex]);
+                    lastUnitIndex = lastUnitIndex + 1 < unitList.Count ? lastUnitIndex + 1 : 0;
+                }
+                else
+                {
+                    buildingButton.SetElementValue((BuildingUnitSO) unitList[firstUnitIndex]);
+                    firstUnitIndex = firstUnitIndex - 1 >= 0 ? firstUnitIndex - 1 : unitList.Count - 1;
+                }
             }
         }
 
-        // open a buildingData spawn button
-        private void AddButton(BuildingData buildingData)
+        // protected override void OnValueChanged(Vector2 other)
+        // {
+        //     if (!_isStart)
+        //     {
+        //         _isStart = true;
+        //         _lastPos = other;
+        //     }
+        //
+        //     Vector2 pos = other;
+        //     _isPositiveDirection = _lastPos.y > pos.y;
+        //     _lastPos = pos;
+        //
+        //     int currElementIndex = _isPositiveDirection ? _childCount - 1 : 0;
+        //     var currentElement = scrollRect.content.GetChild(currElementIndex);
+        //
+        //     if (!IsReachedThreshold(currentElement))
+        //     {
+        //         return;
+        //     }
+        //
+        //     int targetElementIndex = _isPositiveDirection ? 0 : _childCount - 1;
+        //     Transform targetElement = scrollRect.content.GetChild(targetElementIndex);
+        //     Vector2 newPosition = targetElement.position;
+        //
+        //     if (_isPositiveDirection)
+        //     {
+        //         newPosition.y = targetElement.position.y - elementSize.y * 1.5f - elementSpace;
+        //     }
+        //     else
+        //     {
+        //         newPosition.y = targetElement.position.y + elementSize.y * 1.5f + elementSpace;
+        //     }
+        //
+        //     currentElement.position = newPosition;
+        //     currentElement.SetSiblingIndex(targetElementIndex);
+        //
+        //     // if (currentElement.TryGetComponent(out BuildingButton buildingButton))
+        //     // {
+        //     //     List<UnitSO> unitList = unitySo.UnitList;
+        //     //
+        //     //     if (_isPositiveDirection)
+        //     //     {
+        //     //         buildingButton.SetElementValue((BuildingUnitSO) unitList[lastUnitIndex]);
+        //     //         lastUnitIndex = lastUnitIndex + 1 < unitList.Count ? lastUnitIndex + 1 : 0;
+        //     //     }
+        //     //     else
+        //     //     {
+        //     //         buildingButton.SetElementValue((BuildingUnitSO) unitList[firstUnitIndex]);
+        //     //         firstUnitIndex = firstUnitIndex - 1 >= 0 ? firstUnitIndex - 1 : unitList.Count - 1;
+        //     //     }
+        //     // }
+        // }
+
+        IEnumerator CloseComponents()
+        {
+            yield return new WaitForSeconds(.5f);
+            gridLayoutGroup.enabled = false;
+            contentSizeFitter.enabled = false;
+        }
+
+        // open a building button spawn button
+        private void AddButton(BuildingUnitSO buildingSO)
         {
             BuildingButton newBuildingButton = (BuildingButton) GetPooledObject();
             newBuildingButton.gameObject.SetActive(true);
             _scrollerElements.Add(newBuildingButton);
-            newBuildingButton.SetElementValue(buildingData);
+            newBuildingButton.SetElementValue(buildingSO);
+        }
+
+        public void AllButtonActivation(bool isActive)
+        {
+            foreach (var element in _scrollerElements)
+            {
+                element.ButtonActivation(isActive);
+            }
         }
     }
 }

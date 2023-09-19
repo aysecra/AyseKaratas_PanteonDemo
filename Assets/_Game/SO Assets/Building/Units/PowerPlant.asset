@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: PowerPlant
   m_EditorClassIdentifier: 
   name: Power Plant
-  image: {fileID: 0}
+  image: {fileID: 223569758, guid: 46c0f24fe62634842861e959c6524ddd, type: 3}
   info: 
   size: {x: 3, y: 2}
   health: 50
+  productUnitList: []

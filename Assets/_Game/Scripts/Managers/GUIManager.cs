@@ -1,27 +1,18 @@
+using PanteonDemo.Component;
+using PanteonDemo.Event;
+using PanteonDemo.Interfaces;
+using PanteonDemo.SO;
 using UnityEngine;
 
 namespace PanteonDemo
 {
-    /// <summary>
-    /// Event is triggered when buildingData is spawned and placement is completed 
-    /// </summary>
-    public struct BuildingPlaceEvent
-    {
-        public BuildingController SpawnedBuilding { get; private set; }
-
-        public BuildingPlaceEvent(BuildingController buildingController)
-        {
-            SpawnedBuilding = buildingController;
-        }
-    }
-
-    public class GUIManager : Singleton<GUIManager>,
-        EventListener<BuildingSpawnEvent>
+    public class GUIManager : Singleton<GUIManager>
+        , EventListener<SpawnEvent>
+        , EventListener<PlacementEvent>
     {
         [SerializeField] private InformationArea _informationArea;
+        [SerializeField] private ProductionMenu _productionMenu;
         [SerializeField] private GameObject _placementArea;
-
-        private BuildingController _spawnedBuildingController;
 
         private void Start()
         {
@@ -29,46 +20,48 @@ namespace PanteonDemo
             _placementArea.SetActive(false);
         }
 
-        public void SetInformationArea(SoldierData soldierData)
+        public void SetInformationArea(UnitSO unitSo, IPlaceable placeable = null)
         {
-            _informationArea.OpenInfo(soldierData);
-        }
-
-        public void SetInformationArea(BuildingData buildingData, BuildingController selectedBuilding)
-        {
-            _informationArea.OpenInfo(buildingData, selectedBuilding);
+            _informationArea.OpenInfo(unitSo, placeable);
         }
 
         public void OnClickPlacementDeclineButton()
         {
-            _spawnedBuildingController.CloseObject();
-            EventManager.TriggerEvent(new BuildingPlaceEvent(null));
-            _placementArea.SetActive(false);
+            EventManager.TriggerEvent(new PlacementEvent(false));
         }
 
         public void OnClickPlacementConfirmButton()
         {
-            if (_spawnedBuildingController.PlaceObject())
-            {
-                EventManager.TriggerEvent(new BuildingPlaceEvent(_spawnedBuildingController));
-                _placementArea.SetActive(false);
-            }
+            EventManager.TriggerEvent(new PlacementEvent(true));
+        }
+
+        public void ObjectNotSpawnable()
+        {
         }
 
         private void OnEnable()
         {
-            EventManager.EventStartListening<BuildingSpawnEvent>(this);
+            EventManager.EventStartListening<SpawnEvent>(this);
+            EventManager.EventStartListening<PlacementEvent>(this);
         }
 
         private void OnDisable()
         {
-            EventManager.EventStopListening<BuildingSpawnEvent>(this);
+            EventManager.EventStopListening<SpawnEvent>(this);
+            EventManager.EventStopListening<PlacementEvent>(this);
         }
 
-        public void OnEventTrigger(BuildingSpawnEvent currentEvent)
+        public void OnEventTrigger(SpawnEvent currentEvent)
         {
-            _spawnedBuildingController = currentEvent.SpawnedBuilding;
-            _placementArea.SetActive(true);
+            if (currentEvent.Unit.GetType() == typeof(BuildingUnitSO))
+                _placementArea.SetActive(true);
+            _productionMenu.AllButtonActivation(false);
+        }
+
+        public void OnEventTrigger(PlacementEvent currentEvent)
+        {
+            _placementArea.SetActive(false);
+            _productionMenu.AllButtonActivation(true);
         }
     }
 }

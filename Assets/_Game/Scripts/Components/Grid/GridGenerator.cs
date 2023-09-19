@@ -1,30 +1,48 @@
 using System;
+using System.Collections.Generic;
 using PanteonDemo.Logic;
 using PanteonDemo.SO;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace PanteonDemo
+namespace PanteonDemo.Component
 {
-    public class GridGenerator : MonoBehaviour
+    public abstract class GridGenerator : MonoBehaviour
     {
-        [SerializeField] private GridSO gridSO;
+        [SerializeField] protected GridSO gridSO;
         [SerializeField] private Grid grid;
-        [SerializeField] private Transform cellParent;
-        [SerializeField] private Transform cellBeginingPoint;
+        [SerializeField] protected Transform cellParent;
+        [SerializeField] protected Transform cellDownLeftPoint;
+        [SerializeField] protected GridCollider gridCollider;
 
-        private CellInfo[,] _cellArray;
-        private Vector2Int _cellSize;
-        private Vector2 _gridCellSize;
-        private GameObject _cellPrefab;
+        protected CellInfo[,] _cellArray;
+        protected Vector2Int _cellSize;
+        protected Vector2 _gridCellSize;
+        protected GameObject _cellPrefab;
+
+        protected abstract void SetCell();
+
+        protected abstract void SetNeigbors();
+
+        public abstract void CalculateObjectCenter(Vector3 position, Vector2Int size, out Vector3 centerPos,
+            out List<CellInfo> cellList);
+        
+        public abstract bool CalculateObjectFromUpRightCenter(Vector3 position, Vector2Int size, out Vector3 centerPos,
+            out List<CellInfo> cellList);
+
+        public abstract Vector3 GetWorldToCellsCenterPosition(Vector3 position);
+        public abstract List<CellInfo> GetSpawnArea(Vector2Int size, out Vector3 position);
+        protected abstract Vector3 CalculateObjectCenter(Vector3 position, Vector2Int size);
+        public abstract Vector3 GetRightUpOrigin(Vector3 origin, Vector2Int size);
+
 
         private void Start()
         {
             GenerateCell();
         }
 
-        public void GetData()
+        void GetData()
         {
             _cellSize = gridSO.CellSize;
             _cellPrefab = gridSO.CellPrefab;
@@ -33,45 +51,19 @@ namespace PanteonDemo
             CellInfo[,] array = gridSO.CellArray;
             if (array != null)
                 _cellArray = array;
+            else
+            {
+                ClearCell();
+                SetCell();
+            }
         }
 
-        Vector3 GetWorldToCellsWorldPosition(Vector3 position)
+        protected Vector3 GetWorldToCellsWorldPosition(Vector3 position)
         {
             Vector3Int cellPos = grid.WorldToCell(position);
             return grid.CellToWorld(cellPos);
         }
-
-        private void SetCell()
-        {
-            _cellArray = new CellInfo[_cellSize.x, _cellSize.y];
-            Vector3 currPos = cellBeginingPoint.position;
-
-            for (int y = 0; y < _cellSize.y; y++)
-            {
-                for (int x = 0; x < _cellSize.x; x++)
-                {
-                    Vector3 cellPosition = GetWorldToCellsWorldPosition(currPos);
-                    currPos = cellPosition;
-                    cellPosition += (Vector3) (_gridCellSize * .5f);
-
-                    GameObject newObject = Instantiate(_cellPrefab, cellPosition, Quaternion.identity, cellParent);
-
-                    _cellArray[x, y] = new CellInfo()
-                    {
-                        CenterPosition = cellPosition,
-                        BeginingPosition = currPos,
-                        Index = new Vector2Int(x, y)
-                    };
-                    currPos.x += _gridCellSize.x;
-                }
-
-                currPos.x = cellBeginingPoint.position.x;
-                currPos.y += _gridCellSize.y;
-            }
-
-            gridSO.SetCellArray(_cellArray);
-        }
-
+        
         public void GenerateCell()
         {
             GetData();
@@ -108,5 +100,26 @@ namespace PanteonDemo
             _cellArray = new CellInfo[0, 0];
             GC.Collect();
         }
+
+        public CellInfo GetCell(Vector2Int index)
+        {
+            return _cellArray[index.x, index.y];
+        }
+        
+        public CellInfo GetCellInfoToWorldPosition(Vector3 position)
+        {
+            Vector3 pos = GetWorldToCellsCenterPosition(position);
+            
+            foreach (CellInfo cell in _cellArray)
+            {
+                if (pos == cell.CenterPosition)
+                {
+                    return cell;
+                }
+            }
+
+            return null;
+        }
+
     }
 }

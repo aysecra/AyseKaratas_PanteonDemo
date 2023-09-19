@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Barrack
   m_EditorClassIdentifier: 
   name: Barrack
-  image: {fileID: 0}
+  image: {fileID: -1947948582, guid: 46c0f24fe62634842861e959c6524ddd, type: 3}
   info: 'Barrack produces soldiers. '
   size: {x: 4, y: 4}
   health: 100

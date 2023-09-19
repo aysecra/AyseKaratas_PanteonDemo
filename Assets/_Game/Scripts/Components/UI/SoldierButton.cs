@@ -1,74 +1,34 @@
+using PanteonDemo.Event;
+using PanteonDemo.Interfaces;
+using PanteonDemo.SO;
 using UnityEngine;
-using UnityEngine.UI;
 
-namespace PanteonDemo
+namespace PanteonDemo.Component
 {
-    public class SoldierButton : PoolableObject
-        , EventListener<BuildingSpawnEvent>
-        , EventListener<BuildingPlaceEvent>
+    public class SoldierButton : UnitButton
     {
-        [Header("Core Elements")] [SerializeField]
-        private Image _imgElement;
+        [SerializeField] private TMPro.TextMeshProUGUI textDamage;
+        
+        private SoldierUnitSO _currUnitSo;
+        private IPlaceable _spawnerPlaceable;
 
-        [SerializeField] private TMPro.TextMeshProUGUI _textTitle;
-        [SerializeField] private TMPro.TextMeshProUGUI _textHealth;
-        [SerializeField] private TMPro.TextMeshProUGUI _textDamage;
-        [SerializeField] private Button _button;
-
-        private SoldierData _currentSoldierDataData;
-        private bool _isActive = true;
-        private BuildingController _selectedBuilding;
-
-        public void SetElementValue(SoldierData soldierDataData, BuildingController selectedBuilding)
+        protected override UnitSO CurrUnitSo => _currUnitSo;
+        public IPlaceable SpawnerPlaceable  => _spawnerPlaceable;
+        
+        public override void SetElementValue(UnitSO currSo, IPlaceable placeable = null)
         {
-            _selectedBuilding = selectedBuilding;
-            _currentSoldierDataData = soldierDataData;
-            _imgElement.sprite = soldierDataData.Image;
-            _textTitle.text = soldierDataData.Name;
-            _textHealth.text = soldierDataData.Health.ToString();
-            _textDamage.text = soldierDataData.Damage.ToString();
+            _spawnerPlaceable = placeable;
+            _currUnitSo = (SoldierUnitSO) currSo;
+            imgElement.sprite = _currUnitSo.Image;
+            textTitle.text = _currUnitSo.Name;
+            textHealth.text = _currUnitSo.Health.ToString();
+            textDamage.text = _currUnitSo.Damage.ToString();
         }
 
-        public void OnButtonClicked()
-        {
-            if(_isActive)
-            {
-                // uint beginingRow = _selectedBuilding.PlacedCellList[0].Row > 0
-                //     ? _selectedBuilding.PlacedCellList[0].Row-1
-                //     : _selectedBuilding.PlacedCellList[^1].Row < GridGenerator.Instance.RowCount - 1
-                //         ? _selectedBuilding.PlacedCellList[^1].Row + 1
-                //         :_selectedBuilding.PlacedCellList[0].Row;
 
-                // GridsCell cell = GridGenerator.Instance.GetEmptyACell((int) beginingRow, (int) _selectedBuilding.PlacedCellList[0].Column);
-                // SoldierController soldier =
-                //     SharedLevelManager.Instance.SpawnElement<SoldierController>(_currentSoldierDataData.Name,
-                //         cell.transform.position);
-                // cell.CellBase.IsWalkable = false;
-                // soldier.PlacedCell = cell;
-            }
-        }
-
-        protected override void OnEnable()
+        public override void OnButtonClicked()
         {
-            base.OnEnable();
-            EventManager.EventStartListening<BuildingSpawnEvent>(this);
-            EventManager.EventStartListening<BuildingPlaceEvent>(this);
-        }
-
-        private void OnDisable()
-        {
-            EventManager.EventStopListening<BuildingSpawnEvent>(this);
-            EventManager.EventStopListening<BuildingPlaceEvent>(this);
-        }
-
-        public void OnEventTrigger(BuildingSpawnEvent currentEvent)
-        {
-            _isActive = false;
-        }
-
-        public void OnEventTrigger(BuildingPlaceEvent currentEvent)
-        {
-            _isActive = true;
+            EventManager.TriggerEvent(new SpawnEvent(_currUnitSo, _spawnerPlaceable));
         }
     }
 }

@@ -1,12 +1,11 @@
 using System.Collections.Generic;
+using PanteonDemo.Interfaces;
 using UnityEngine;
-
 
 namespace PanteonDemo.Logic
 {
     public class CellInfo 
     {
-        public Vector3 BeginingPosition;
         public Vector3 CenterPosition;
         public Vector2Int Index;
         public CellInfo Connection;

@@ -81,27 +81,5 @@ public static class PropertyDrawersHelper
         return temp.ToArray();
     }
 
-    public static string[] AllSoldierNames()
-    {
-        var temp = new List<string>();
-        foreach (SoldierData soldier in SharedLevelManager.Instance.SoldierUnits)
-        {
-            temp.Add(soldier.Name);
-        }
-
-        return temp.ToArray();
-    }
-
-    public static string[] AllBuildingNames()
-    {
-        var temp = new List<string>();
-        foreach (BuildingData building in SharedLevelManager.Instance.BuildingElements)
-        {
-            temp.Add(building.Name);
-        }
-
-        return temp.ToArray();
-    }
-
 #endif
 }

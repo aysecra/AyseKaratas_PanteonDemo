@@ -27,7 +27,7 @@ RectTransform:
   m_GameObject: {fileID: 599389118598236912}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.24, y: 0.24, z: 0.24}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 7404153131621872979}
@@ -64,10 +64,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _lifeTime: 0
-  _imgElement: {fileID: 6074369441396428228}
-  _textTitle: {fileID: 773443386842397130}
-  _textHealth: {fileID: 8141415399248208757}
-  _button: {fileID: 1345745901478337593}
+  imgElement: {fileID: 6074369441396428228}
+  textTitle: {fileID: 773443386842397130}
+  textHealth: {fileID: 8141415399248208757}
+  button: {fileID: 1345745901478337593}
 --- !u!1 &771053539749584069
 GameObject:
   m_ObjectHideFlags: 0
@@ -192,7 +192,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2060296715191847573}
-        m_TargetAssemblyTypeName: PanteonDemo.BuildingButton, Assembly-CSharp
+        m_TargetAssemblyTypeName: PanteonDemo.Component.BuildingButton, Assembly-CSharp
         m_MethodName: OnButtonClicked
         m_Mode: 1
         m_Arguments:
@@ -316,7 +316,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 6}
+  m_AnchoredPosition: {x: 0, y: -22}
   m_SizeDelta: {x: 0, y: 34.8}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &5442766857165718225
@@ -618,7 +618,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -11}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2037420048492488309

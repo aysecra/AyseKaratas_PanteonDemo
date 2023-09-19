@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fda47d3ac661d46bca10e869fdd7ca6b, type: 3}
   m_Name: Grid1 SO
   m_EditorClassIdentifier: 
-  cellSize: {x: 3, y: 3}
+  cellSize: {x: 20, y: 15}
   gridCellSize: {x: 0.32, y: 0.32}
   cellPrefab: {fileID: 8234184065334702781, guid: a0e16bbf98e6c4c69b725e1eb8a27382, type: 3}
+  _gridDownLeftPosition: {x: 0, y: 0, z: 0}

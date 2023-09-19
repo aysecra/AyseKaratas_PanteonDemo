@@ -1,15 +1,14 @@
-using System.Collections;
 using System.Collections.Generic;
 using PanteonDemo.Interfaces;
-using UnityEngine;
+using PanteonDemo.Logic;
 
 namespace PanteonDemo.Controller
 {
     public static class PlacementController
     {
-        public static void Place(IPlaceable client)
+        public static void Place(IPlaceable client, List<CellInfo> cell)
         {
-            client.Place();
+            client.Place(cell);
         }
     }
 }

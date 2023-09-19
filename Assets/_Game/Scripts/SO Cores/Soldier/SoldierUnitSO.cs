@@ -14,7 +14,7 @@ namespace PanteonDemo.SO
         [SerializeField] private float durationPerCell;
         
         [Header("Placement Elements")]
-        [SerializeField] private Vector2 size;
+        [SerializeField] private Vector2Int size;
         
         [Header("Damageable Elements")]
         [SerializeField] private uint health;
@@ -24,7 +24,7 @@ namespace PanteonDemo.SO
         public override Sprite Image => image;
         public override string Info => info;
         public float DurationPerCell => durationPerCell;
-        public override Vector2 Size => size;
+        public override Vector2Int Size => size;
         public override uint Health => health;
         public uint Damage => damage;
     }

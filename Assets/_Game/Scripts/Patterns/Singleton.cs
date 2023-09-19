@@ -26,15 +26,12 @@ namespace PanteonDemo
 
         public virtual void Awake()
         {
-            if (_instance == null)
+            if (!Application.isPlaying)
             {
-                _instance = this as T;
-                DontDestroyOnLoad(this.gameObject);
+                return;
             }
-            else
-            {
-                Destroy(gameObject);
-            }
+
+            _instance = this as T;
         }
     }
 

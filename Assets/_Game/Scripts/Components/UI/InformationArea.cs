@@ -1,8 +1,11 @@
 using System.Collections.Generic;
+using PanteonDemo.Interfaces;
+using PanteonDemo.Logic;
+using PanteonDemo.SO;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace PanteonDemo
+namespace PanteonDemo.Component
 {
     public class InformationArea : ObjectPool
     {
@@ -15,14 +18,9 @@ namespace PanteonDemo
         [SerializeField] private GameObject _productArea;
 
         private int _characterCount;
-        private List<SoldierButton> _scrollerElements = new List<SoldierButton>();
         private bool _isBeginScrollbar;
-
-        protected override void Start()
-        {
-            amountToPool = (uint) SharedLevelManager.Instance.SoldierUnits.Count;
-            base.Start();
-        }
+        private List<SoldierButton> _productButtonList = new List<SoldierButton>();
+        private IPlaceable _placeable;
 
         private void Update()
         {
@@ -42,7 +40,7 @@ namespace PanteonDemo
             _productArea.SetActive(false);
         }
 
-        public void OpenInfoArea()
+        private void OpenInfoArea()
         {
             CloseAllButton();
             _txtName.gameObject.SetActive(true);
@@ -50,26 +48,31 @@ namespace PanteonDemo
             _imgInfo.gameObject.SetActive(true);
         }
 
-        public void OpenInfo(BuildingData infoElement, BuildingController selectedBuilding)
+        public void OpenInfo(UnitSO unitSo, IPlaceable placeable = null)
         {
+            _placeable = placeable;
             OpenInfoArea();
-            _imgInfo.sprite = infoElement.Image;
-            _txtInfo.text = $"{infoElement.Info}Health: {infoElement.Health}hp";
-            _txtName.text = infoElement.Name;
-
-            if (infoElement.Production != null && infoElement.Production.Count > 0)
+            _imgInfo.sprite = unitSo.Image;
+            SoldierUnitSO soldierSo = unitSo as SoldierUnitSO;
+            if (soldierSo == null)
+                _txtInfo.text = $"{unitSo.Info} Health: {unitSo.Health}hp";
+            else
             {
-                List<SoldierData> soldierList = new List<SoldierData>();
-                foreach (var production in infoElement.Production)
-                {
-                    SoldierData soldierData = SharedLevelManager.Instance.GetSoldier(production.Name);
-                    if (soldierData != null) soldierList.Add(soldierData);
-                }
+                _txtInfo.text = $"{unitSo.Info} Health: {unitSo.Health}hp Damage: {soldierSo.Damage}";
+            }
 
-                if (soldierList.Count > 0)
+            _txtName.text = unitSo.Name;
+            List<UnitSO> productList = null;
+
+            if (unitSo.GetType() == typeof(BuildingUnitSO))
+                productList = ((BuildingUnitSO) unitSo).ProductUnitList;
+
+            if (productList != null && productList.Count > 0)
+            {
+                if (productList != null && productList.Count > 0)
                 {
                     _productArea.SetActive(true);
-                    AddButtons(soldierList,selectedBuilding);
+                    AddButtons(productList);
                 }
                 else
                 {
@@ -82,40 +85,31 @@ namespace PanteonDemo
             }
         }
 
-        public void OpenInfo(SoldierData infoElement)
-        {
-            OpenInfoArea();
-            _productArea.SetActive(false);
-            _imgInfo.sprite = infoElement.Image;
-            _txtInfo.text = $"{infoElement.Info} Health: {infoElement.Health} hp  Damage: {infoElement.Damage}";
-            _txtName.text = infoElement.Name;
-        }
-
-        private void AddButtons(List<SoldierData> productList, BuildingController selectedBuilding)
+        private void AddButtons(List<UnitSO> productList)
         {
             for (int i = 0; i < productList.Count; i++)
             {
-                SoldierData soldierData = productList[i];
-                AddButton(soldierData,selectedBuilding);
+                UnitSO product = productList[i];
+                AddButton((SoldierUnitSO) product);
             }
         }
 
-        private void AddButton(SoldierData soldierData, BuildingController selectedBuilding)
+        private void AddButton(SoldierUnitSO soldierSO)
         {
             SoldierButton newSoldierButton = (SoldierButton) GetPooledObject();
+            _productButtonList.Add(newSoldierButton);
             newSoldierButton.gameObject.SetActive(true);
-            _scrollerElements.Add(newSoldierButton);
-            newSoldierButton.SetElementValue(soldierData,selectedBuilding);
+            newSoldierButton.SetElementValue(soldierSO, _placeable);
         }
 
         private void CloseAllButton()
         {
-            foreach (SoldierButton soldierButton in _scrollerElements)
+            foreach (SoldierButton soldierButton in _productButtonList)
             {
                 soldierButton.gameObject.SetActive(false);
             }
 
-            _scrollerElements.Clear();
+            _productButtonList.Clear();
         }
     }
 }

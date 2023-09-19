@@ -1,31 +1,9 @@
-using System;
-using UnityEngine;
+using PanteonDemo.Enum;
+using PanteonDemo.Event;
 using UnityEngine.SceneManagement;
 
-namespace PanteonDemo
+namespace PanteonDemo.Manager
 {
-    public enum LevelState
-    {
-        Opened,
-        Started,
-        Paused,
-        Failed,
-        Completed
-    }
-    
-    /// <summary>
-    /// Event is triggered when changing level state
-    /// </summary>
-    public struct LevelEvent
-    {
-        public LevelState State { get; }
-
-        public LevelEvent(LevelState state)
-        {
-            State = state;
-        }
-    }
-    
     public class GameManager : PersistentSingleton<GameManager>
     {
         

@@ -12,13 +12,15 @@ namespace PanteonDemo.SO
         [SerializeField] private GameObject cellPrefab;
 
         private CellInfo[,] _cellArray;
+        [SerializeField] private Vector3 _gridDownLeftPosition; 
 
         public Vector2Int CellSize => cellSize;
 
         public GameObject CellPrefab => cellPrefab;
 
         public Vector2 GridCellSize => gridCellSize;
-
+        public Vector3 GridDownLeftPosition => _gridDownLeftPosition;
+        
         public CellInfo[,] CellArray
         {
             get
@@ -33,7 +35,7 @@ namespace PanteonDemo.SO
                 return null;
             }
         }
-
+        
         public void ClearCell()
         {
             _cellArray = null;
@@ -47,5 +49,12 @@ namespace PanteonDemo.SO
 
             UnityEditor.EditorUtility.SetDirty(this);
         }
+
+        public void SetGridDownLeftPosition(Vector3 position)
+        {
+            _gridDownLeftPosition = position;
+            UnityEditor.EditorUtility.SetDirty(this);
+        }
+        
     }
 }

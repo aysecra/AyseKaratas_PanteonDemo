@@ -44,10 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc28c2d7df5e44a2cac9ab404fffd348, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _parentObject: {fileID: 1476833942}
-  _poolableObject: {fileID: 4297486650485082030, guid: c767f55964dae4cee9435d35bde0f205, type: 3}
-  _amountToPool: 10
-  _isAllObjectActive: 0
+  parentObject: {fileID: 1476833942}
+  poolableObject: {fileID: 2526637928258491261, guid: fd128ae9fee7841529eb43e34b155228, type: 3}
+  amountToPool: 10
+  isAllObjectActive: 0
 --- !u!1 &1942001508
 GameObject:
   m_ObjectHideFlags: 0
@@ -92,10 +92,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc28c2d7df5e44a2cac9ab404fffd348, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _parentObject: {fileID: 1942001510}
-  _poolableObject: {fileID: 2534175737873969673, guid: 5ce00887171734e3a8ae64d35b787091, type: 3}
-  _amountToPool: 10
-  _isAllObjectActive: 0
+  parentObject: {fileID: 1942001510}
+  poolableObject: {fileID: 4535700580126855952, guid: e16c23a278f2c4634a09b7b8597d27b8, type: 3}
+  amountToPool: 10
+  isAllObjectActive: 0
 --- !u!1 &2416716544214128460
 GameObject:
   m_ObjectHideFlags: 0
@@ -183,7 +183,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5989579884444084595}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2d63f394591c546f8933a5ab2e0bf86a, type: 3}
   m_Name: 
@@ -202,39 +202,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a52a6dde6742f44b2a36a31a342978ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _soldierPool: {fileID: 1942001509}
-  _buildingPool: {fileID: 1476833943}
-  _soldierUnits:
-  - Name: Soldier 1
-    Image: {fileID: -474893265, guid: 46c0f24fe62634842861e959c6524ddd, type: 3}
-    Health: 10
-    Damage: 10
-    Info: 
-  - Name: Soldier 2
-    Image: {fileID: -3277226, guid: 46c0f24fe62634842861e959c6524ddd, type: 3}
-    Health: 10
-    Damage: 5
-    Info: 
-  - Name: Soldier 3
-    Image: {fileID: 1025467469, guid: 46c0f24fe62634842861e959c6524ddd, type: 3}
-    Health: 10
-    Damage: 2
-    Info: 
-  _buildingElements:
-  - Name: Barrack
-    Column: 4
-    Row: 4
-    Health: 100
-    Image: {fileID: -1947948582, guid: 46c0f24fe62634842861e959c6524ddd, type: 3}
-    Info: 'Barrack produces soldiers. '
-    Production:
-    - Name: Soldier 1
-    - Name: Soldier 2
-    - Name: Soldier 3
-  - Name: Power Plant
-    Column: 3
-    Row: 2
-    Health: 50
-    Image: {fileID: 223569758, guid: 46c0f24fe62634842861e959c6524ddd, type: 3}
-    Info: 
-    Production: []
+  _poolList:
+  - {fileID: 1942001509}
+  - {fileID: 1476833943}
