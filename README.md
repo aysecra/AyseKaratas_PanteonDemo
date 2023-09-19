@@ -1,8 +1,6 @@
 # Ayse Karatas - Panteon Demo
 ## Strategy Game Demo for Game Developer Application to Panteon
 
-### Build Link: https://drive.google.com/drive/folders/1LbI8JGU4BynUJ8uFd-Ry27PteGVj1KnL?usp=sharing 
-
 * Added building spawn and placement
 * Added information area and production area (aside from the production area, there is also an infine scroll in the product section of the information area)
 * Added pathfinding with A* algorithm for soldier movement. The soldier is selected with left click and moves to the place clicked with right click. If he clicked on the empty cell, it is placed in that cell.If it clicks on a building or soldier, it deals damage.
