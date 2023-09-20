@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using PanteonDemo.SO;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace PanteonDemo.Component
@@ -9,7 +10,7 @@ namespace PanteonDemo.Component
     public class ProductionMenu : InfiniteScroller
     {
         [SerializeField] private UnitySO unitySo;
-        [SerializeField] private GridLayoutGroup gridLayoutGroup;
+        [SerializeField] private VerticalLayoutGroup verticalLayout;
         [SerializeField] private ContentSizeFitter contentSizeFitter;
         [SerializeField] private int maxNotScrollingAmount = 20;
 
@@ -100,64 +101,11 @@ namespace PanteonDemo.Component
                 }
             }
         }
-
-        // protected override void OnValueChanged(Vector2 other)
-        // {
-        //     if (!_isStart)
-        //     {
-        //         _isStart = true;
-        //         _lastPos = other;
-        //     }
-        //
-        //     Vector2 pos = other;
-        //     _isPositiveDirection = _lastPos.y > pos.y;
-        //     _lastPos = pos;
-        //
-        //     int currElementIndex = _isPositiveDirection ? _childCount - 1 : 0;
-        //     var currentElement = scrollRect.content.GetChild(currElementIndex);
-        //
-        //     if (!IsReachedThreshold(currentElement))
-        //     {
-        //         return;
-        //     }
-        //
-        //     int targetElementIndex = _isPositiveDirection ? 0 : _childCount - 1;
-        //     Transform targetElement = scrollRect.content.GetChild(targetElementIndex);
-        //     Vector2 newPosition = targetElement.position;
-        //
-        //     if (_isPositiveDirection)
-        //     {
-        //         newPosition.y = targetElement.position.y - elementSize.y * 1.5f - elementSpace;
-        //     }
-        //     else
-        //     {
-        //         newPosition.y = targetElement.position.y + elementSize.y * 1.5f + elementSpace;
-        //     }
-        //
-        //     currentElement.position = newPosition;
-        //     currentElement.SetSiblingIndex(targetElementIndex);
-        //
-        //     // if (currentElement.TryGetComponent(out BuildingButton buildingButton))
-        //     // {
-        //     //     List<UnitSO> unitList = unitySo.UnitList;
-        //     //
-        //     //     if (_isPositiveDirection)
-        //     //     {
-        //     //         buildingButton.SetElementValue((BuildingUnitSO) unitList[lastUnitIndex]);
-        //     //         lastUnitIndex = lastUnitIndex + 1 < unitList.Count ? lastUnitIndex + 1 : 0;
-        //     //     }
-        //     //     else
-        //     //     {
-        //     //         buildingButton.SetElementValue((BuildingUnitSO) unitList[firstUnitIndex]);
-        //     //         firstUnitIndex = firstUnitIndex - 1 >= 0 ? firstUnitIndex - 1 : unitList.Count - 1;
-        //     //     }
-        //     // }
-        // }
-
+        
         IEnumerator CloseComponents()
         {
             yield return new WaitForSeconds(.5f);
-            gridLayoutGroup.enabled = false;
+            verticalLayout.enabled = false;
             contentSizeFitter.enabled = false;
         }
 

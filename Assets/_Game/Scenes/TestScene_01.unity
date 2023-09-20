@@ -44767,20 +44767,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4592012227914441796, guid: e893bf62234a4443a82de10068501401, type: 3}
-      propertyPath: m_SizeDelta.y
+    - target: {fileID: 3458795467375849990, guid: e893bf62234a4443a82de10068501401, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3458795467375849990, guid: e893bf62234a4443a82de10068501401, type: 3}
+      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6573508906206748193, guid: e893bf62234a4443a82de10068501401, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8370774394833892836, guid: e893bf62234a4443a82de10068501401, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8370774394833892836, guid: e893bf62234a4443a82de10068501401, type: 3}
-      propertyPath: m_AnchorMax.y
+    - target: {fileID: 8903880459478262694, guid: e893bf62234a4443a82de10068501401, type: 3}
+      propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using PanteonDemo.Interfaces;
-using PanteonDemo.Logic;
 using PanteonDemo.SO;
 using UnityEngine;
 using UnityEngine.UI;
