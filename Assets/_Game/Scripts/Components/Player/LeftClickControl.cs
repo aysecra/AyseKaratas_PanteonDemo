@@ -3,6 +3,7 @@ using PanteonDemo.Enum;
 using PanteonDemo.Event;
 using PanteonDemo.Interfaces;
 using PanteonDemo.Logic;
+using PanteonDemo.Manager;
 using PanteonDemo.SO;
 using UnityEngine;
 
@@ -42,6 +43,27 @@ namespace PanteonDemo.Component
                     DraggingObjectLogic.DetectAndDragObject(_mainCamera, _spawnedDragableObject);
                 else if (_spawnedDragableObject == null && _isTouch)
                     DetectingAndOpenInfoArea.OpenInfo(_mainCamera);
+
+                if (_isTouch && RightClickControl.Instance.MovableObject == null)
+                {
+                    Vector2 currentMousePoint = InputManager.Instance.CurrentPosition;
+                    Vector3 origin = _mainCamera.ScreenToWorldPoint(currentMousePoint);
+                    RaycastHit2D[] hits = Physics2D.RaycastAll(origin, Vector2.zero);
+
+                    foreach (RaycastHit2D hit in hits)
+                    {
+                        Transform hitTransform = hit.transform;
+                        {
+                            if (hitTransform.TryGetComponent(out IMovableWithPath movableObject))
+                            {
+                                RightClickControl.Instance.MovableObject = hitTransform.gameObject;
+                                RightClickControl.Instance.MovableObjectScript = movableObject;
+                                movableObject.SetIsSelectedObject(true);
+                                break;
+                            }
+                        }
+                    }
+                }
             }
         }
 

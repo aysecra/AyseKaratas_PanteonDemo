@@ -17,6 +17,18 @@ namespace PanteonDemo.Component
 
         public bool IsClickable { get; set; }
 
+        public GameObject MovableObject
+        {
+            get => _movableObject;
+            set => _movableObject = value;
+        }
+
+        public IMovableWithPath MovableObjectScript
+        {
+            get => _movableObjectScript;
+            set => _movableObjectScript = value;
+        }
+
         private void Start()
         {
             IsClickable = true;
@@ -38,17 +50,18 @@ namespace PanteonDemo.Component
             {
                 Transform hitTransform = hit.transform;
 
-                if (_movableObject == null)
-                {
-                    if (hitTransform.TryGetComponent(out IMovableWithPath movableObject))
-                    {
-                        _movableObject = hitTransform.gameObject;
-                        _movableObjectScript = movableObject;
-                        movableObject.SetIsSelectedObject(true);
-                        break;
-                    }
-                }
-                else if (hitTransform.TryGetComponent(out GridCollider grid))
+                // if (_movableObject == null)
+                // {
+                //     if (hitTransform.TryGetComponent(out IMovableWithPath movableObject))
+                //     {
+                //         _movableObject = hitTransform.gameObject;
+                //         _movableObjectScript = movableObject;
+                //         movableObject.SetIsSelectedObject(true);
+                //         break;
+                //     }
+                // }
+
+                if (hitTransform.TryGetComponent(out GridCollider grid))
                 {
                     gridCollider = grid;
                     gridGenerator = grid.GridGenerator;
@@ -115,8 +128,8 @@ namespace PanteonDemo.Component
                     List<CellInfo> path = Pathfinding.FindPath(startCell, targetCell);
                     if (path is {Count: > 0})
                     {
-                        path[0].IsWalkable = false;
-                        path[^1].IsWalkable = true;
+                        startCell.IsWalkable = true;
+                        path[^1].IsWalkable = false;
 
                         _movableObjectScript.GoPath(GetPathPositionArray(path), new List<CellInfo> {path[^1]},
                             damageableObjectScript);

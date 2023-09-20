@@ -54,10 +54,10 @@ namespace PanteonDemo.Component
             _imgInfo.sprite = unitSo.Image;
             SoldierUnitSO soldierSo = unitSo as SoldierUnitSO;
             if (soldierSo == null)
-                _txtInfo.text = $"{unitSo.Info} Health: {unitSo.Health}hp";
+                _txtInfo.text = $"{unitSo.Info} Health:{unitSo.Health}hp";
             else
             {
-                _txtInfo.text = $"{unitSo.Info} Health: {unitSo.Health}hp Damage: {soldierSo.Damage}";
+                _txtInfo.text = $"{unitSo.Info} Health:{unitSo.Health}hp Damage:{soldierSo.Damage}";
             }
 
             _txtName.text = unitSo.Name;
