@@ -42,6 +42,11 @@ namespace PanteonDemo
             StartCoroutine(IObjectNotSpawnable());
         }
 
+        public void ActivateProductionButtons(bool isActivate)
+        {
+            productionMenu.AllButtonActivation(isActivate);
+        }
+
         IEnumerator IObjectNotSpawnable()
         {
             notPlaceableText.gameObject.SetActive(true);
@@ -65,8 +70,10 @@ namespace PanteonDemo
         public void OnEventTrigger(SpawnEvent currentEvent)
         {
             if (currentEvent.Unit.GetType() == typeof(BuildingUnitSO))
+            {
                 placementArea.SetActive(true);
-            productionMenu.AllButtonActivation(false);
+                productionMenu.AllButtonActivation(false);
+            }
         }
 
         public void OnEventTrigger(PlacementEvent currentEvent)

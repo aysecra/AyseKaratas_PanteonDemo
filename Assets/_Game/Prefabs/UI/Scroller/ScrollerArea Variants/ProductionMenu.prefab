@@ -299,9 +299,9 @@ MonoBehaviour:
   isAllObjectActive: 0
   scrollRect: {fileID: 3176857452217485007}
   scrollViewTransform: {fileID: 8969504725027873426}
-  outOfBoundsThreshold: 400
+  outOfBoundsThreshold: 650
   elementSize: {x: 90, y: 90}
-  elementSpace: 10
+  elementSpace: 105
   unitySo: {fileID: 11400000, guid: 2ad302ed7bada4d0d96844e21da138de, type: 2}
   verticalLayout: {fileID: 4104225043534915466}
   contentSizeFitter: {fileID: 4126776521754093354}

@@ -40,6 +40,7 @@ namespace PanteonDemo.Component
                 {
                     LeftClickControl.Instance.IsClickable = true;
                     RightClickControl.Instance.IsClickable = true;
+                    GUIManager.Instance.ActivateProductionButtons(true);
                     PlacementController.Place(this, targetCell);
                     SetIsSelectedObject(false);
                     if(damageable != null)
