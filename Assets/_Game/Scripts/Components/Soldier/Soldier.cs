@@ -1,8 +1,8 @@
-using PanteonDemo.Interfaces;
-using PanteonDemo.SO;
+using StrategyDemo.Interfaces;
+using StrategyDemo.SO;
 using UnityEngine;
 
-namespace PanteonDemo.Component
+namespace StrategyDemo.Component
 {
     public class Soldier : PoolableObject
         , IChangeable
@@ -19,7 +19,7 @@ namespace PanteonDemo.Component
         {
             _unitSO = currUnit as SoldierUnitSO;
 
-            if (_unitSO != null)
+            if (!ReferenceEquals(_unitSO, null))
             {
                 spriteRenderer.sprite = _unitSO.Image;
                 soldierHealth.SetSoldier(_unitSO.Health, _unitSO.Damage);

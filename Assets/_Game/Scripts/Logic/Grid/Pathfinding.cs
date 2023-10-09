@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using PanteonDemo.Logic;
+using StrategyDemo.Logic;
 using UnityEngine;
 
-namespace PanteonDemo
+namespace StrategyDemo
 {
     public static class Pathfinding
     {

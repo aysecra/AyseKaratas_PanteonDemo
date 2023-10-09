@@ -1,6 +1,6 @@
-using PanteonDemo.Interfaces;
+using StrategyDemo.Interfaces;
 
-namespace PanteonDemo.Controller
+namespace StrategyDemo.Controller
 {
     public static class ClickController
     {

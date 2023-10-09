@@ -1,7 +1,7 @@
-using PanteonDemo.Component;
+using StrategyDemo.Component;
 using UnityEngine;
 
-namespace PanteonDemo.Interfaces
+namespace StrategyDemo.Interfaces
 {
     public interface ICellShape
     {

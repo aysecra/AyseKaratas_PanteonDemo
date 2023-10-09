@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace PanteonDemo.SO
+namespace StrategyDemo.SO
 {
     [CreateAssetMenu(menuName = "SO/Building Unit")]
 

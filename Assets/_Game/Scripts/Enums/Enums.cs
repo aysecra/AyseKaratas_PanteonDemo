@@ -1,4 +1,4 @@
-namespace PanteonDemo.Enum
+namespace StrategyDemo.Enum
 {
     public enum InputType
     {

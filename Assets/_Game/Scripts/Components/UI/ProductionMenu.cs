@@ -1,11 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
-using PanteonDemo.SO;
+using StrategyDemo.SO;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-namespace PanteonDemo.Component
+namespace StrategyDemo.Component
 {
     public class ProductionMenu : InfiniteScroller
     {

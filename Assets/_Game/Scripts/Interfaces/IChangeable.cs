@@ -1,7 +1,7 @@
-using PanteonDemo.SO;
+using StrategyDemo.SO;
 using UnityEngine;
 
-namespace PanteonDemo.Interfaces
+namespace StrategyDemo.Interfaces
 {
     public interface IChangeable
     {

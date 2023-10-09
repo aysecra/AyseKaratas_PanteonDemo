@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace PanteonDemo.SO
+namespace StrategyDemo.SO
 {
     [CreateAssetMenu(menuName = "SO/ChangeableComponent Unit")]
     public class SoldierUnitSO : UnitSO

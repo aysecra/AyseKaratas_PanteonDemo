@@ -1,8 +1,8 @@
 using System.Collections.Generic;
-using PanteonDemo.Logic;
+using StrategyDemo.Logic;
 using UnityEngine;
 
-namespace PanteonDemo.Interfaces
+namespace StrategyDemo.Interfaces
 {
     public interface IDragable
     {

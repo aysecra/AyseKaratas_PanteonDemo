@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace PanteonDemo.SO
+namespace StrategyDemo.SO
 {
     public abstract class UnitSO : ScriptableObject
     {

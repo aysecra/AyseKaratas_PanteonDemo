@@ -1,12 +1,12 @@
 using System;
 using System.Collections.Generic;
 
-namespace PanteonDemo
+namespace StrategyDemo
 {
     public static class EventManager
     {
         private static Dictionary<Type, List<IEventListener>> _listenerDictionary;
-        
+
         public static void EventStartListening<T>(this EventListener<T> listener) where T : struct
         {
             AddEventListener<T>(listener);
@@ -26,7 +26,7 @@ namespace PanteonDemo
 
         private static void AddEventListener<T>(EventListener<T> listener) where T : struct
         {
-            if (_listenerDictionary == null)
+            if (ReferenceEquals(_listenerDictionary, null))
             {
                 _listenerDictionary = new Dictionary<Type, List<IEventListener>>();
             }
@@ -72,6 +72,7 @@ namespace PanteonDemo
                 }
             }
         }
+
         #endregion
     }
 

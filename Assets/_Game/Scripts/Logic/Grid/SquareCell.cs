@@ -1,9 +1,9 @@
 using System.Collections.Generic;
-using PanteonDemo.Component;
-using PanteonDemo.Interfaces;
+using StrategyDemo.Component;
+using StrategyDemo.Interfaces;
 using UnityEngine;
 
-namespace PanteonDemo.Logic
+namespace StrategyDemo.Logic
 {
     public class SquareCell : CellInfo, ICellShape
     {

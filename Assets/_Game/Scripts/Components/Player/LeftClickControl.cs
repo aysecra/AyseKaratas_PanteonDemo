@@ -1,13 +1,13 @@
-using PanteonDemo.Controller;
-using PanteonDemo.Enum;
-using PanteonDemo.Event;
-using PanteonDemo.Interfaces;
-using PanteonDemo.Logic;
-using PanteonDemo.Manager;
-using PanteonDemo.SO;
+using StrategyDemo.Controller;
+using StrategyDemo.Enum;
+using StrategyDemo.Event;
+using StrategyDemo.Interfaces;
+using StrategyDemo.Logic;
+using StrategyDemo.Manager;
+using StrategyDemo.SO;
 using UnityEngine;
 
-namespace PanteonDemo.Component
+namespace StrategyDemo.Component
 {
     public class LeftClickControl : Singleton<LeftClickControl>
         , IUpdateListener
@@ -37,14 +37,13 @@ namespace PanteonDemo.Component
 
         public void ManagedUpdate()
         {
-            if (IsClickable)
+            if (IsClickable && _isTouch)
             {
-                if (_spawnedDragableObject != null && _isTouch)
+                if (!ReferenceEquals(_spawnedDragableObject, null))
                     DraggingObjectLogic.DetectAndDragObject(_mainCamera, _spawnedDragableObject);
-                else if (_spawnedDragableObject == null && _isTouch)
-                    DetectingAndOpenInfoArea.OpenInfo(_mainCamera);
-
-                if (_isTouch && RightClickControl.Instance.MovableObject == null)
+                else DetectingAndOpenInfoArea.OpenInfo(_mainCamera);
+                
+                if (ReferenceEquals(RightClickControl.Instance.MovableObjectScript, null))
                 {
                     Vector2 currentMousePoint = InputManager.Instance.CurrentPosition;
                     Vector3 origin = _mainCamera.ScreenToWorldPoint(currentMousePoint);
@@ -99,11 +98,9 @@ namespace PanteonDemo.Component
         {
             RightClickControl.Instance.IsClickable = true;
             bool isPlaced = currentEvent.IsPlaced;
-            if (isPlaced)
-                PlacementController.Place((IPlaceable) _spawnedDragableObject,
-                    _spawnedDragableObject.PlaceableCellList);
-            if (_spawnedDragableObject != null)
-                _spawnedDragableObject.Object.SetActive(isPlaced);
+            if (isPlaced && !ReferenceEquals(_spawnedDragableObject, null))
+                PlacementController.Place((IPlaceable) _spawnedDragableObject, _spawnedDragableObject.PlaceableCellList);
+            _spawnedDragableObject?.Object.SetActive(isPlaced);
             _spawnedDragableObject = null;
         }
     }

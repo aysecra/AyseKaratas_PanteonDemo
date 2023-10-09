@@ -1,4 +1,4 @@
-namespace PanteonDemo.Interfaces
+namespace StrategyDemo.Interfaces
 {
     public interface IDamageable
     {

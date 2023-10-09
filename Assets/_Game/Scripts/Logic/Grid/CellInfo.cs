@@ -1,8 +1,8 @@
 using System.Collections.Generic;
-using PanteonDemo.Interfaces;
+using StrategyDemo.Interfaces;
 using UnityEngine;
 
-namespace PanteonDemo.Logic
+namespace StrategyDemo.Logic
 {
     public class CellInfo 
     {

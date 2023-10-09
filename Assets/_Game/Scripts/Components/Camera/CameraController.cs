@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace PanteonDemo.Component
+namespace StrategyDemo.Component
 {
     public class CameraController : MonoBehaviour
     {

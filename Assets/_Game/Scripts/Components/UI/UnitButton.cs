@@ -1,9 +1,9 @@
-using PanteonDemo.Interfaces;
-using PanteonDemo.SO;
+using StrategyDemo.Interfaces;
+using StrategyDemo.SO;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace PanteonDemo.Component
+namespace StrategyDemo.Component
 {
     public abstract class UnitButton : PoolableObject
     {
@@ -24,7 +24,7 @@ namespace PanteonDemo.Component
 
         public void ButtonActivation(bool isActive)
         {
-            if (button != null)
+            if (!ReferenceEquals(button, null))
                 button.interactable = isActive;
         }
 

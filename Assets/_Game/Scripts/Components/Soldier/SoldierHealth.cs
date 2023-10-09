@@ -1,9 +1,9 @@
-using PanteonDemo.Controller;
-using PanteonDemo.Interfaces;
+using StrategyDemo.Controller;
+using StrategyDemo.Interfaces;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace PanteonDemo.Component
+namespace StrategyDemo.Component
 {
     public class SoldierHealth : MonoBehaviour
                                 , IDamageable

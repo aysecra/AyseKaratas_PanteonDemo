@@ -1,13 +1,13 @@
 using System;
 using System.Collections.Generic;
-using PanteonDemo.Component;
-using PanteonDemo.Event;
-using PanteonDemo.Interfaces;
-using PanteonDemo.Logic;
-using PanteonDemo.SO;
+using StrategyDemo.Component;
+using StrategyDemo.Event;
+using StrategyDemo.Interfaces;
+using StrategyDemo.Logic;
+using StrategyDemo.SO;
 using UnityEngine;
 
-namespace PanteonDemo.Controller
+namespace StrategyDemo.Controller
 {
     public class SpawnController : MonoBehaviour, EventListener<SpawnEvent>
     {
@@ -20,7 +20,7 @@ namespace PanteonDemo.Controller
             spawnedObject.gameObject.SetActive(true);
             ((IChangeable) spawnedObject).SetType(currUnit);
             List<CellInfo> cellArea = _spawnArea.GetSpawnArea(currUnit.Size, out Vector3 spawnPos);
-            
+
             if (cellArea.Count > 0)
             {
                 if (spawnedObject.TryGetComponent(out IDragable dragable))
@@ -31,7 +31,7 @@ namespace PanteonDemo.Controller
 
                 else
                 {
-                    if (currentEvent.SpawnerPlaceable == null)
+                    if (ReferenceEquals(currentEvent.SpawnerPlaceable, null))
                     {
                         spawnedObject.transform.position = spawnPos;
                         PlacementController.Place(spawnedObject.GetComponent<IPlaceable>(), cellArea);
@@ -39,8 +39,8 @@ namespace PanteonDemo.Controller
                     else
                     {
                         CellInfo target = currentEvent.SpawnerPlaceable.GetPlaceableNeighbour();
-                        
-                        if (target != null)
+
+                        if (!ReferenceEquals(target, null))
                         {
                             spawnedObject.transform.position = target.CenterPosition;
                             PlacementController.Place(spawnedObject.GetComponent<IPlaceable>(),

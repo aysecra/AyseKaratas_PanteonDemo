@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace PanteonDemo
+namespace StrategyDemo
 {
     public static class Raycast2DManager
     {

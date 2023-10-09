@@ -235,7 +235,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _lifeTime: 0
-  _unitSO: {fileID: 11400000, guid: cb26f7106ca304921a50e8d684a4b408, type: 2}
+  unitSo: {fileID: 11400000, guid: cb26f7106ca304921a50e8d684a4b408, type: 2}
   spriteRenderer: {fileID: 16704498066070221}
   buildingHealth: {fileID: 2526637928258491260}
   buildingPlacement: {fileID: 2526637928258491258}

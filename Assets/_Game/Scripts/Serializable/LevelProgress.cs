@@ -1,4 +1,4 @@
-namespace PanteonDemo.Serializable
+namespace StrategyDemo.Serializable
 {
     [System.Serializable]
     public class LevelProgress

@@ -1,12 +1,12 @@
 using System;
 using System.Collections.Generic;
 using DG.Tweening;
-using PanteonDemo.Controller;
-using PanteonDemo.Interfaces;
-using PanteonDemo.Logic;
+using StrategyDemo.Controller;
+using StrategyDemo.Interfaces;
+using StrategyDemo.Logic;
 using UnityEngine;
 
-namespace PanteonDemo.Component
+namespace StrategyDemo.Component
 {
     public class SoldierMovement : MonoBehaviour
         , IMovableWithPath
@@ -43,8 +43,7 @@ namespace PanteonDemo.Component
                     GUIManager.Instance.ActivateProductionButtons(true);
                     PlacementController.Place(this, targetCell);
                     SetIsSelectedObject(false);
-                    if(damageable != null)
-                        damageable.TakeDamage(GetComponent<IHitable>().Damage);
+                    damageable?.TakeDamage(GetComponent<IHitable>().Damage);
                 }));
         }
 
@@ -78,7 +77,7 @@ namespace PanteonDemo.Component
                     }
                 }
 
-                if (targetCell != null)
+                if (!ReferenceEquals(targetCell, null))
                     break;
             }
 

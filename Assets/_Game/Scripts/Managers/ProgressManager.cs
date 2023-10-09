@@ -1,10 +1,10 @@
 using System.Collections.Generic;
-using PanteonDemo.Enum;
-using PanteonDemo.Event;
-using PanteonDemo.Serializable;
+using StrategyDemo.Enum;
+using StrategyDemo.Event;
+using StrategyDemo.Serializable;
 using UnityEngine;
 
-namespace PanteonDemo.Manager
+namespace StrategyDemo.Manager
 {
     public class ProgressManager : PersistentSingleton<ProgressManager>
         , EventListener<LevelEvent>

@@ -1,8 +1,8 @@
 using System;
-using PanteonDemo.Logic;
+using StrategyDemo.Logic;
 using UnityEngine;
 
-namespace PanteonDemo.SO
+namespace StrategyDemo.SO
 {
     [CreateAssetMenu(menuName = "SO/Grid Element")]
     public class GridSO : ScriptableObject

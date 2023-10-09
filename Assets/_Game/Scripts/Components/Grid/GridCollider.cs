@@ -1,4 +1,4 @@
-using PanteonDemo.SO;
+using StrategyDemo.SO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 using UnityEditor.SceneManagement;
 #endif
 
-namespace PanteonDemo.Component
+namespace StrategyDemo.Component
 {
     public class GridCollider : MonoBehaviour
     {

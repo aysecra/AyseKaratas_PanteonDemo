@@ -1,9 +1,9 @@
-using PanteonDemo.Controller;
-using PanteonDemo.Interfaces;
-using PanteonDemo.Manager;
+using StrategyDemo.Controller;
+using StrategyDemo.Interfaces;
+using StrategyDemo.Manager;
 using UnityEngine;
 
-namespace PanteonDemo.Logic
+namespace StrategyDemo.Logic
 {
     public static class DetectingAndOpenInfoArea
     {

@@ -1,8 +1,8 @@
-using PanteonDemo.Interfaces;
+using StrategyDemo.Interfaces;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace PanteonDemo.Component
+namespace StrategyDemo.Component
 {
     public class BuildingHealth : MonoBehaviour, IDamageable
     {

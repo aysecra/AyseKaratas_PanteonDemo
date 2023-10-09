@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
-using PanteonDemo.Interfaces;
+using StrategyDemo.Interfaces;
 using UnityEngine;
 
-namespace PanteonDemo.SO
+namespace StrategyDemo.SO
 {
     [CreateAssetMenu(menuName = "SO/Update Management")]
     public class UpdateManagementSO : ScriptableObject

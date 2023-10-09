@@ -1,9 +1,9 @@
 using System.Collections.Generic;
-using PanteonDemo.Interfaces;
-using PanteonDemo.SO;
+using StrategyDemo.Interfaces;
+using StrategyDemo.SO;
 using UnityEngine;
 
-namespace PanteonDemo
+namespace StrategyDemo
 {
     public class SharedLevelManager : PersistentSingleton<SharedLevelManager>
     {

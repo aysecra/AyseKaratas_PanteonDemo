@@ -1,7 +1,7 @@
-using PanteonDemo.Enum;
+using StrategyDemo.Enum;
 using UnityEngine;
 
-namespace PanteonDemo.Event
+namespace StrategyDemo.Event
 {
     /// <summary>
     /// Event is triggered when tapping

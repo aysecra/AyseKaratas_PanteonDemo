@@ -1,9 +1,9 @@
-using PanteonDemo.Event;
-using PanteonDemo.Interfaces;
-using PanteonDemo.SO;
+using StrategyDemo.Event;
+using StrategyDemo.Interfaces;
+using StrategyDemo.SO;
 using UnityEngine;
 
-namespace PanteonDemo.Component
+namespace StrategyDemo.Component
 {
     public class SoldierButton : UnitButton
     {

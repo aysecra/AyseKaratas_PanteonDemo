@@ -1,35 +1,34 @@
-using System.Collections.Generic;
-using PanteonDemo.Interfaces;
-using PanteonDemo.Logic;
-using PanteonDemo.SO;
+using StrategyDemo.Interfaces;
+using StrategyDemo.SO;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-namespace PanteonDemo.Component
+namespace StrategyDemo.Component
 {
     public class Building : PoolableObject, IChangeable, IClickable
     {
-        [SerializeField] private BuildingUnitSO _unitSO;
+        [SerializeField] private BuildingUnitSO unitSo;
         [SerializeField] private SpriteRenderer spriteRenderer;
         [SerializeField] private BuildingHealth buildingHealth;
         [SerializeField] private BuildingPlacement buildingPlacement;
 
-        public UnitSO UnitySo => _unitSO;
+        public UnitSO UnitySo => unitSo;
 
         public void SetType(UnitSO currUnit)
         {
-            _unitSO = currUnit as BuildingUnitSO;
+            unitSo = currUnit as BuildingUnitSO;
 
-            if (_unitSO != null)
+            if (!ReferenceEquals(unitSo, null))
             {
-                spriteRenderer.sprite = _unitSO.Image;
-                buildingHealth.SetBuilding(_unitSO.Health);
-                buildingPlacement.SetBuilding(_unitSO.Size);
+                spriteRenderer.sprite = unitSo.Image;
+                buildingHealth.SetBuilding(unitSo.Health);
+                buildingPlacement.SetBuilding(unitSo.Size);
             }
         }
 
         public void OnClick()
         {
-            GUIManager.Instance.SetInformationArea(_unitSO, buildingPlacement.GetComponent<IPlaceable>());
+            GUIManager.Instance.SetInformationArea(unitSo, buildingPlacement.GetComponent<IPlaceable>());
         }
     }
 }

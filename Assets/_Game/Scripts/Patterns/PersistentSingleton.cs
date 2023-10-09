@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace PanteonDemo
+namespace StrategyDemo
 {
     public class PersistentSingleton<T> : MonoBehaviour where T : UnityEngine.Component
     {

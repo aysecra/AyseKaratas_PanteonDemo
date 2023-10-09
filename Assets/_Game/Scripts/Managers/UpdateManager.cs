@@ -1,9 +1,9 @@
 using System;
-using PanteonDemo.Interfaces;
-using PanteonDemo.SO;
+using StrategyDemo.Interfaces;
+using StrategyDemo.SO;
 using UnityEngine;
 
-namespace PanteonDemo.Manager
+namespace StrategyDemo.Manager
 {
     public class UpdateManager : MonoBehaviour
     {

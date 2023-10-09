@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
-using PanteonDemo.Logic;
-using PanteonDemo.SO;
+using StrategyDemo.Logic;
+using StrategyDemo.SO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 using UnityEditor.SceneManagement;
 #endif
 
-namespace PanteonDemo.Component
+namespace StrategyDemo.Component
 {
     public abstract class GridGenerator : MonoBehaviour
     {
@@ -52,7 +52,7 @@ namespace PanteonDemo.Component
             _gridCellSize = gridSO.GridCellSize;
             grid.cellSize = _gridCellSize;
             CellInfo[,] array = gridSO.CellArray;
-            if (array != null)
+            if (!ReferenceEquals(array, null))
                 _cellArray = array;
             else
             {

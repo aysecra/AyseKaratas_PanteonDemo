@@ -1,6 +1,6 @@
-using PanteonDemo.Enum;
+using StrategyDemo.Enum;
 
-namespace PanteonDemo.Event
+namespace StrategyDemo.Event
 {
     /// <summary>
     /// Event is triggered when changing level state

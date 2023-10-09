@@ -1,8 +1,8 @@
-using PanteonDemo.Enum;
-using PanteonDemo.Event;
+using StrategyDemo.Enum;
+using StrategyDemo.Event;
 using UnityEngine.SceneManagement;
 
-namespace PanteonDemo.Manager
+namespace StrategyDemo.Manager
 {
     public class GameManager : PersistentSingleton<GameManager>
     {

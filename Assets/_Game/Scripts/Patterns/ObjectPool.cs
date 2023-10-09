@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace PanteonDemo
+namespace StrategyDemo
 {
     public class ObjectPool : MonoBehaviour
     {

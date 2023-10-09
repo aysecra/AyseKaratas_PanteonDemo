@@ -1,12 +1,12 @@
 using System.Collections.Generic;
-using PanteonDemo.Enum;
-using PanteonDemo.Event;
-using PanteonDemo.Interfaces;
-using PanteonDemo.Logic;
-using PanteonDemo.Manager;
+using StrategyDemo.Enum;
+using StrategyDemo.Event;
+using StrategyDemo.Interfaces;
+using StrategyDemo.Logic;
+using StrategyDemo.Manager;
 using UnityEngine;
 
-namespace PanteonDemo.Component
+namespace StrategyDemo.Component
 {
     public class RightClickControl : Singleton<RightClickControl>
         , EventListener<InputEvent>
@@ -19,7 +19,6 @@ namespace PanteonDemo.Component
 
         public GameObject MovableObject
         {
-            get => _movableObject;
             set => _movableObject = value;
         }
 
@@ -35,7 +34,7 @@ namespace PanteonDemo.Component
             _mainCamera = Camera.main;
         }
 
-        public void DetectMovableAndTargetObject()
+        public void DetectTargetObject()
         {
             GridCollider gridCollider = null;
             GridGenerator gridGenerator = null;
@@ -49,17 +48,6 @@ namespace PanteonDemo.Component
             foreach (RaycastHit2D hit in hits)
             {
                 Transform hitTransform = hit.transform;
-
-                // if (_movableObject == null)
-                // {
-                //     if (hitTransform.TryGetComponent(out IMovableWithPath movableObject))
-                //     {
-                //         _movableObject = hitTransform.gameObject;
-                //         _movableObjectScript = movableObject;
-                //         movableObject.SetIsSelectedObject(true);
-                //         break;
-                //     }
-                // }
 
                 if (hitTransform.TryGetComponent(out GridCollider grid))
                 {
@@ -83,14 +71,14 @@ namespace PanteonDemo.Component
         void Move(GridCollider gridCollider, GridGenerator gridGenerator, Vector3 origin,
             IDamageable damageableObjectScript, GameObject damageableObject)
         {
-            if (_movableObject != null && gridCollider != null && gridGenerator != null)
+            if (!ReferenceEquals(_movableObjectScript, null) && !ReferenceEquals(gridCollider, null) && !ReferenceEquals(gridGenerator, null))
             {
                 CellInfo startCell = gridGenerator.GetCellInfoToWorldPosition(_movableObject.transform.position);
                 origin.z = gridCollider.transform.position.z;
                 CellInfo targetCell = null;
                 bool isTargetNeighbour = false;
 
-                if (damageableObjectScript == null)
+                if (ReferenceEquals(damageableObjectScript, null))
                     targetCell = gridGenerator.GetCellInfoToWorldPosition(origin);
 
                 else if (damageableObject.TryGetComponent(out IPlaceable placeable))
@@ -123,7 +111,7 @@ namespace PanteonDemo.Component
                 }
 
 
-                if (!isTargetNeighbour && targetCell != null)
+                if (!isTargetNeighbour && !ReferenceEquals(targetCell, null))
                 {
                     List<CellInfo> path = Pathfinding.FindPath(startCell, targetCell);
                     if (path is {Count: > 0})
@@ -166,14 +154,14 @@ namespace PanteonDemo.Component
 
         public void OnEventTrigger(InputEvent currentEvent)
         {
-            if (IsClickable && currentEvent.State == TouchState.RightClick)
+            if (IsClickable && currentEvent.State == TouchState.RightClick && !ReferenceEquals(_movableObjectScript, null))
             {
-                DetectMovableAndTargetObject();
+                DetectTargetObject();
             }
 
             if (currentEvent.State == TouchState.LeftClick)
             {
-                if (_movableObjectScript != null && _movableObject != null)
+                if (!ReferenceEquals(_movableObjectScript, null))
                 {
                     _movableObjectScript.SetIsSelectedObject(false);
                     _movableObjectScript = null;

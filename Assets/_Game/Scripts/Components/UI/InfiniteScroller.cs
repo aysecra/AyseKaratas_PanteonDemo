@@ -1,9 +1,8 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace PanteonDemo.Component
+namespace StrategyDemo.Component
 {
     public abstract class InfiniteScroller : ObjectPool
     {

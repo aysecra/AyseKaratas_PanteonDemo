@@ -1,10 +1,10 @@
 using System.Collections.Generic;
-using PanteonDemo.Interfaces;
-using PanteonDemo.SO;
+using StrategyDemo.Interfaces;
+using StrategyDemo.SO;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace PanteonDemo.Component
+namespace StrategyDemo.Component
 {
     public class InformationArea : ObjectPool
     {
@@ -53,7 +53,7 @@ namespace PanteonDemo.Component
             OpenInfoArea();
             _imgInfo.sprite = unitSo.Image;
             SoldierUnitSO soldierSo = unitSo as SoldierUnitSO;
-            if (soldierSo == null)
+            if (ReferenceEquals(soldierSo, null))
                 _txtInfo.text = $"{unitSo.Info} Health:{unitSo.Health}hp";
             else
             {
@@ -66,9 +66,9 @@ namespace PanteonDemo.Component
             if (unitSo.GetType() == typeof(BuildingUnitSO))
                 productList = ((BuildingUnitSO) unitSo).ProductUnitList;
 
-            if (productList != null && productList.Count > 0)
+            if (!ReferenceEquals(productList, null) && productList.Count > 0)
             {
-                if (productList != null && productList.Count > 0)
+                if (productList.Count > 0)
                 {
                     _productArea.SetActive(true);
                     AddButtons(productList);

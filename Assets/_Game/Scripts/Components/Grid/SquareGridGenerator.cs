@@ -1,9 +1,9 @@
 using System.Collections.Generic;
-using PanteonDemo.Interfaces;
-using PanteonDemo.Logic;
+using StrategyDemo.Interfaces;
+using StrategyDemo.Logic;
 using UnityEngine;
 
-namespace PanteonDemo.Component
+namespace StrategyDemo.Component
 {
     public class SquareGridGenerator : GridGenerator
     {

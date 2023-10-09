@@ -1,10 +1,10 @@
 using System.Collections.Generic;
-using PanteonDemo.Interfaces;
-using PanteonDemo.Logic;
-using PanteonDemo.SO;
+using StrategyDemo.Interfaces;
+using StrategyDemo.Logic;
+using StrategyDemo.SO;
 using UnityEngine;
 
-namespace PanteonDemo.Component
+namespace StrategyDemo.Component
 {
     public class BuildingPlacement : MonoBehaviour, IPlaceable
         , IDragable
@@ -77,7 +77,7 @@ namespace PanteonDemo.Component
                     }
                 }
 
-                if (targetCell != null)
+                if (!ReferenceEquals(targetCell, null))
                     break;
             }
 

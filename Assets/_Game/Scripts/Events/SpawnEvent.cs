@@ -1,10 +1,10 @@
 using System.Collections.Generic;
-using PanteonDemo.Interfaces;
-using PanteonDemo.Logic;
-using PanteonDemo.SO;
+using StrategyDemo.Logic;
+using StrategyDemo.Interfaces;
+using StrategyDemo.SO;
 using UnityEngine;
 
-namespace PanteonDemo.Event
+namespace StrategyDemo.Event
 {
     /// <summary>
     /// Event is triggered when a unit needs to spawn

@@ -1,9 +1,9 @@
-using PanteonDemo.Component;
-using PanteonDemo.Interfaces;
-using PanteonDemo.SO;
+using StrategyDemo.SO;
+using StrategyDemo.Component;
+using StrategyDemo.Interfaces;
 using UnityEngine;
 
-namespace PanteonDemo.Logic
+namespace StrategyDemo.Logic
 {
     public static class CellNeighborCalculator
     {

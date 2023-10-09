@@ -1,8 +1,8 @@
-using PanteonDemo.Component;
+using StrategyDemo.Component;
 using UnityEditor;
 using UnityEngine;
 
-namespace PanteonDemo.Editor
+namespace StrategyDemo.Editor
 {
 #if UNITY_EDITOR
     [CustomEditor(typeof(GridGenerator), true)]

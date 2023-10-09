@@ -1,11 +1,11 @@
 using System.Collections;
-using PanteonDemo.Component;
-using PanteonDemo.Event;
-using PanteonDemo.Interfaces;
-using PanteonDemo.SO;
+using StrategyDemo.Component;
+using StrategyDemo.Event;
+using StrategyDemo.Interfaces;
+using StrategyDemo.SO;
 using UnityEngine;
 
-namespace PanteonDemo
+namespace StrategyDemo
 {
     public class GUIManager : Singleton<GUIManager>
         , EventListener<SpawnEvent>

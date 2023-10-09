@@ -1,8 +1,8 @@
 using System.Collections.Generic;
-using PanteonDemo.Interfaces;
-using PanteonDemo.Logic;
+using StrategyDemo.Interfaces;
+using StrategyDemo.Logic;
 
-namespace PanteonDemo.Controller
+namespace StrategyDemo.Controller
 {
     public static class PlacementController
     {

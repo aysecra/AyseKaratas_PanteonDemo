@@ -1,5 +1,5 @@
 
-namespace PanteonDemo.Event
+namespace StrategyDemo.Event
 {
     /// <summary>
     /// Event is triggered when a placeable object is spawned and placement is completed 

@@ -1,9 +1,9 @@
 using System;
-using PanteonDemo.Enum;
-using PanteonDemo.Event;
+using StrategyDemo.Enum;
+using StrategyDemo.Event;
 using UnityEngine;
 
-namespace PanteonDemo.Manager
+namespace StrategyDemo.Manager
 {
     public class InputManager : Singleton<InputManager>
     {

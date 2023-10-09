@@ -1,8 +1,8 @@
-using PanteonDemo.Event;
-using PanteonDemo.Interfaces;
-using PanteonDemo.SO;
+using StrategyDemo.Event;
+using StrategyDemo.Interfaces;
+using StrategyDemo.SO;
 
-namespace PanteonDemo.Component
+namespace StrategyDemo.Component
 {
     public class BuildingButton : UnitButton
     {

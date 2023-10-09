@@ -1,10 +1,10 @@
 using System.Collections.Generic;
-using PanteonDemo.Component;
-using PanteonDemo.Interfaces;
-using PanteonDemo.Manager;
+using StrategyDemo.Component;
+using StrategyDemo.Interfaces;
+using StrategyDemo.Manager;
 using UnityEngine;
 
-namespace PanteonDemo.Logic
+namespace StrategyDemo.Logic
 {
     public static class DraggingObjectLogic
     {
@@ -58,9 +58,9 @@ namespace PanteonDemo.Logic
                 }
             }
 
-            if (IsTouchStart && gridCollider != null)
+            if (IsTouchStart && !ReferenceEquals(gridCollider, null))
             {
-                if (gridGenerator != null)
+                if (!ReferenceEquals(gridGenerator, null))
                 {
                     gridGenerator.CalculateObjectCenter(origin, spawnedDragableObject.Size,
                         out Vector3 cellPos, out List<CellInfo> cellList);
